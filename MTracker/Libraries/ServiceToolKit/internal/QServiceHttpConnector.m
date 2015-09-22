@@ -80,7 +80,7 @@
         [request.endpoint _handleRequest:request];
     }
     
-    id<MServiceRequestDelegate> delegate = request.delegate;
+    id<QServiceRequestDelegate> delegate = request.delegate;
     NSInvocation *i = nil;
     if(request.error){
         SEL failSelector = @selector(request:failedWithError:);
@@ -241,7 +241,7 @@
     DBG(@"received %d bytes, progress: %d%%",[data length],(int)(progress * 100));
     
     // Notify the delegate for progress update.
-    id<MServiceRequestDelegate> delegate = _currentRequest.delegate;
+    id<QServiceRequestDelegate> delegate = _currentRequest.delegate;
     
     SEL updateSelector = @selector(request:updatedWithProgress:);
     if([delegate respondsToSelector:updateSelector]){

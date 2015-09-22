@@ -30,7 +30,7 @@ extern NSString* const kMSERVICE_CONTENT_TYPE_JSON;
 @property(nonatomic,strong)NSString* httpMethod;
 @property(nonatomic,strong)NSString* contentType;
 @property(nonatomic,assign)Class returnType;
-@property(nonatomic,assign)MServiceRequestStatus status;
+@property(nonatomic,assign)QServiceRequestStatus status;
 
 @property(nonatomic,strong) NSMutableData* responseData;
 @property(nonatomic,strong) id returnObject;
