@@ -18,7 +18,7 @@
     return [self requestForOperation:opName returnType:returnType delegate:nil];
 }
 
-+(QServiceRequest*)requestForOperation:(NSString*)opName returnType:(Class)returnType delegate:(id<MServiceRequestDelegate>)delegate{
++(QServiceRequest*)requestForOperation:(NSString*)opName returnType:(Class)returnType delegate:(id<QServiceRequestDelegate>)delegate{
     QServiceRequest *req = [[QServiceRequest alloc] init];
     req.httpMethod = kMService_HTTP_METHOD_GET;
     req.operationName = opName;
@@ -29,12 +29,12 @@
 }
 
 +(QServiceRequest*)requestForOperation:(NSString*)opName returnType:(Class)returnType delegate:(id)delegate completeSelector:(SEL)completeSelector failSelector:(SEL)failSelector{
-    MServiceRequestSelectorDelegate *del = [MServiceRequestSelectorDelegate delegateWithTarget:delegate completeSelector:completeSelector failSelector:failSelector];
+    QServiceRequestSelectorDelegate *del = [QServiceRequestSelectorDelegate delegateWithTarget:delegate completeSelector:completeSelector failSelector:failSelector];
     return [self requestForOperation:opName returnType:returnType delegate:del];
 }
 
-+(QServiceRequest*)requestForOperation:(NSString*)opName returnType:(Class)returnType completeBlock:(MServiceRequestCompleteBlock)completeBlock failBlock:(MServiceRequestFailBlock)failBlock{
-    MServiceRequestBlockDelegate *del = [MServiceRequestBlockDelegate delegateWithCompleteBlock:completeBlock failBlock:failBlock];
++(QServiceRequest*)requestForOperation:(NSString*)opName returnType:(Class)returnType completeBlock:(QServiceRequestCompleteBlock)completeBlock failBlock:(QServiceRequestErrorBlock)failBlock{
+    QServiceRequestBlockDelegate *del = [QServiceRequestBlockDelegate delegateWithCompleteBlock:completeBlock failBlock:failBlock];
     return [self requestForOperation:opName returnType:returnType delegate:del];
 }
 
@@ -181,43 +181,43 @@ static NSString* _assembleURL(NSString* base, NSString* path, NSDictionary* para
 
 
 #pragma mark - Block callback accessor
--(MServiceRequestBlockDelegate*) _getBlockDelegate{
-    if(_delegate!= nil && ![_delegate isKindOfClass:[MServiceRequestBlockDelegate class]]){
+-(QServiceRequestBlockDelegate*) _getBlockDelegate{
+    if(_delegate!= nil && ![_delegate isKindOfClass:[QServiceRequestBlockDelegate class]]){
         //OVERRIDE OR BAIL-OUT ?
         // user already has a delegate set
         NSAssert(false,@"completeBlock could not be set while request.delegate is %@",_delegate);
     }
     if(_delegate == nil){
-        _delegate = [[MServiceRequestBlockDelegate alloc] init];
+        _delegate = [[QServiceRequestBlockDelegate alloc] init];
     }
-    MServiceRequestBlockDelegate *bd = (MServiceRequestBlockDelegate*)_delegate;
+    QServiceRequestBlockDelegate *bd = (QServiceRequestBlockDelegate*)_delegate;
     return bd;
 }
--(void)setCompleteBlock:(MServiceRequestCompleteBlock)completeBlock{
+-(void)setCompleteBlock:(QServiceRequestCompleteBlock)completeBlock{
     [self _getBlockDelegate].completeBlock = completeBlock;
 }
 
--(MServiceRequestCompleteBlock) completeBlock{
-    if([_delegate isKindOfClass:[MServiceRequestBlockDelegate class]]){
-        return ((MServiceRequestBlockDelegate*)_delegate).completeBlock;
+-(QServiceRequestCompleteBlock) completeBlock{
+    if([_delegate isKindOfClass:[QServiceRequestBlockDelegate class]]){
+        return ((QServiceRequestBlockDelegate*)_delegate).completeBlock;
     }
     return nil;
 }
--(void)setFailBlock:(MServiceRequestFailBlock)failBlock{
+-(void)setFailBlock:(QServiceRequestErrorBlock)failBlock{
     [self _getBlockDelegate].failBlock = failBlock;
 }
--(MServiceRequestFailBlock)failBlock{
-    if([_delegate isKindOfClass:[MServiceRequestBlockDelegate class]]){
-        return ((MServiceRequestBlockDelegate*)_delegate).failBlock;
+-(QServiceRequestErrorBlock)failBlock{
+    if([_delegate isKindOfClass:[QServiceRequestBlockDelegate class]]){
+        return ((QServiceRequestBlockDelegate*)_delegate).failBlock;
     }
     return nil;
 }
--(void)setUpdateBlock:(MServiceRequestUpdateBlock)updateBlock{
+-(void)setUpdateBlock:(QServiceRequestUpdateBlock)updateBlock{
     [self _getBlockDelegate].updateBlock = updateBlock;
 }
--(MServiceRequestUpdateBlock)updateBlock{
-    if([_delegate isKindOfClass:[MServiceRequestBlockDelegate class]]){
-        return ((MServiceRequestBlockDelegate*)_delegate).updateBlock;
+-(QServiceRequestUpdateBlock)updateBlock{
+    if([_delegate isKindOfClass:[QServiceRequestBlockDelegate class]]){
+        return ((QServiceRequestBlockDelegate*)_delegate).updateBlock;
     }
     return nil;
 }
@@ -246,11 +246,11 @@ static NSString* _assembleURL(NSString* base, NSString* path, NSDictionary* para
 //===============================================================================================
 // MServiceRequestBlockDelegate implementation
 //===============================================================================================
-@implementation MServiceRequestBlockDelegate
+@implementation QServiceRequestBlockDelegate
 
-+(id<MServiceRequestDelegate>)delegateWithCompleteBlock:(MServiceRequestCompleteBlock)completeBlock failBlock:(MServiceRequestFailBlock)failBlock updateBlock:(MServiceRequestUpdateBlock)updatedBlock cancelBlock:(MServiceRequestCancelBlock)cancelBlock{
++(id<QServiceRequestDelegate>)delegateWithCompleteBlock:(QServiceRequestCompleteBlock)completeBlock failBlock:(QServiceRequestErrorBlock)failBlock updateBlock:(QServiceRequestUpdateBlock)updatedBlock cancelBlock:(QServiceRequestCancelBlock)cancelBlock{
     
-    MServiceRequestBlockDelegate *delegate = [[self alloc] init];
+    QServiceRequestBlockDelegate *delegate = [[self alloc] init];
     delegate.completeBlock = completeBlock;
     delegate.failBlock = failBlock;
     delegate.updateBlock = updatedBlock;
@@ -258,11 +258,11 @@ static NSString* _assembleURL(NSString* base, NSString* path, NSDictionary* para
     return [delegate autorelease];
 }
 
-+(id<MServiceRequestDelegate>)delegateWithCompleteBlock:(MServiceRequestCompleteBlock)completeBlock failBlock:(MServiceRequestFailBlock)failBlock{
++(id<QServiceRequestDelegate>)delegateWithCompleteBlock:(QServiceRequestCompleteBlock)completeBlock failBlock:(QServiceRequestErrorBlock)failBlock{
     return [self delegateWithCompleteBlock:completeBlock failBlock:failBlock updateBlock:nil cancelBlock:nil];
 }
 
-+(id<MServiceRequestDelegate>)delegateWithCompleteBlock:(MServiceRequestCompleteBlock)completeBlock{
++(id<QServiceRequestDelegate>)delegateWithCompleteBlock:(QServiceRequestCompleteBlock)completeBlock{
     return [self delegateWithCompleteBlock:completeBlock failBlock:nil updateBlock:nil cancelBlock:nil];
 }
 
@@ -310,14 +310,14 @@ static NSString* _assembleURL(NSString* base, NSString* path, NSDictionary* para
 // MServiceRequestSelectorDelegate implementation
 //===============================================================================================
 #pragma mark - ServiceRequestDelegate Implementation
-@implementation MServiceRequestSelectorDelegate
+@implementation QServiceRequestSelectorDelegate
 
-+(id<MServiceRequestDelegate>)delegateWithTarget:(id)target completeSelector:(SEL)completeSelector failSelector:(SEL)failSelector updateSelector:(SEL)updateSelector cancelSelector:(SEL)cancelSelector{
-    MServiceRequestSelectorDelegate *delegate = [[MServiceRequestSelectorDelegate alloc] init];
++(id<QServiceRequestDelegate>)delegateWithTarget:(id)target completeSelector:(SEL)completeSelector failSelector:(SEL)failSelector updateSelector:(SEL)updateSelector cancelSelector:(SEL)cancelSelector{
+    QServiceRequestSelectorDelegate *delegate = [[QServiceRequestSelectorDelegate alloc] init];
     
     delegate.target = target;
     delegate.completeSelector = completeSelector;
-    delegate.failSelector = failSelector;
+    delegate.errorSelector = failSelector;
     delegate.updateSelector = updateSelector;
     delegate.cancelSelector = cancelSelector;
     
@@ -327,12 +327,12 @@ static NSString* _assembleURL(NSString* base, NSString* path, NSDictionary* para
 /**
  * dispatch callbacks to different selectors
  */
-+(id<MServiceRequestDelegate>)delegateWithTarget:(id)target completeSelector:(SEL)completeSelector failSelector:(SEL)failSelector{
++(id<QServiceRequestDelegate>)delegateWithTarget:(id)target completeSelector:(SEL)completeSelector failSelector:(SEL)failSelector{
     return [self delegateWithTarget:target completeSelector:completeSelector failSelector:failSelector updateSelector:nil cancelSelector:nil];
 }
 
 
-+(id<MServiceRequestDelegate>)delegateWithTarget:(id)target completeSelector:(SEL)completeSelector{
++(id<QServiceRequestDelegate>)delegateWithTarget:(id)target completeSelector:(SEL)completeSelector{
     return [self delegateWithTarget:target completeSelector:completeSelector failSelector:nil updateSelector:nil cancelSelector:nil];
 }
 
@@ -382,8 +382,8 @@ static NSString* _assembleURL(NSString* base, NSString* path, NSDictionary* para
 -(void) request:(QServiceRequest *)request failedWithError:(NSError *)error{
     // If we have fail selector set, call it.
     // If not, fall back to the completed selector, and user handles the request.error manually
-    if(_failSelector){
-        NSInvocation *i = [self _createInvocationWithTarget:_target selector:_failSelector retainArguments:NO, request,error];
+    if(_errorSelector){
+        NSInvocation *i = [self _createInvocationWithTarget:_target selector:_errorSelector retainArguments:NO, request,error];
         [i performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:NO];
     }else{
         [self request:request completedWithObject:request.returnObject];

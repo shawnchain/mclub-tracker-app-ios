@@ -9,12 +9,16 @@
 #import "MTMapViewController.h"
 #import "MTMenuViewController.h"
 #import "MTLoginViewController.h"
+#import "MTRegisterViewController.h"
+#import "MTrackerService.h"
 
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 
-@interface MTMapViewController () <MKMapViewDelegate>
-
+@interface MTMapViewController () <MKMapViewDelegate,CLLocationManagerDelegate>
+@property(strong,nonatomic) CLLocationManager *locationManager;
+@property(strong,atomic) CLLocation *currentNewLocation;
+@property(strong,nonatomic) NSTimer *updateTimer;
 @end
 
 @implementation MTMapViewController
@@ -23,24 +27,76 @@
     // Do any additional setup after loading the view from its nib.
     //self.leftMenu = [[MTMenuViewController alloc] initWithNibName:@"MTMenuViewController" bundle:nil];
     [super viewDidLoad];
-    UIBarButtonItem *setup = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(onSetupButtonClicked:)];
+    UIBarButtonItem *setup = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(onSetupAction:)];
     self.navigationItem.leftBarButtonItem = setup;
-    
-    UIBarButtonItem *login = [[UIBarButtonItem alloc] initWithTitle:@"登录" style:UIBarButtonItemStylePlain target:self action:@selector(onLoginButtonClicked:)];
-    self.navigationItem.rightBarButtonItem = login;
 
+    // register for the registation and login notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNotifyReceived:) name:kMTNotifyDeviceLoggedIn object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNotifyReceived:) name:kMTNotifyDeviceLoggedOut object:nil];
+    
+    [self setupRightButtons];
+    
+    CLLocationManager *locMan = [[CLLocationManager alloc] init];
+    locMan.delegate = self;
+    locMan.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+    self.locationManager = locMan;
+
+}
+
+-(void)setupRightButtons{
+    MTrackerService *mts = [MTrackerService sharedInstance];
+    NSString *storedUsername = [mts getConfig:kMTConfigUsername];
+    if(storedUsername && storedUsername.length > 0){
+        //if([[MTrackerService sharedInstance] getConfig:kMTConfigUsername]){
+        // show the login
+        UIBarButtonItem *login = [[UIBarButtonItem alloc] initWithTitle:@"登录" style:UIBarButtonItemStylePlain target:self action:@selector(onLoginAction:)];
+        self.navigationItem.rightBarButtonItem = login;
+    }else{
+        // show the register
+        UIBarButtonItem *reg = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStylePlain target:self action:@selector(onRegisterAction:)];
+        self.navigationItem.rightBarButtonItem = reg;
+    }
+    
     self.title = @"Tracker Map";
-    if([self checkGPSPermission]){
-        MKMapView *map = (MKMapView*)(self.view);
-        map.userTrackingMode = MKUserTrackingModeFollowWithHeading;
+}
+
+-(void)onNotifyReceived:(NSNotification*)notify{
+    if(notify.name == kMTNotifyDeviceLoggedIn){
+        MTrackerService *mts = [MTrackerService sharedInstance];
+        NSString *username = [mts getConfig:kMTConfigUsername];
+        NSString *token = [mts getConfig:kMTConfigServiceToken];
+        if(username && token){
+            // user logged in, update the right button with tracker
+            UIBarButtonItem *track =[[UIBarButtonItem alloc] initWithTitle:@"跟踪" style:UIBarButtonItemStylePlain target:self action:@selector(onTrackAction:)];
+            self.navigationItem.rightBarButtonItem = track;
+            self.title = [NSString stringWithFormat:@"%@",username];
+        }
+    }else if(notify.name == kMTNotifyDeviceLoggedOut){
+        // Remove the token
+        [[MTrackerService sharedInstance] setConfig:kMTConfigServiceToken value:nil];
+        // Stop tracking if any
+        if(self.navigationItem.rightBarButtonItem.tag == 1){
+            [self onTrackAction:self.navigationItem.rightBarButtonItem];
+        }
+        
+        // Prompt user of the logout
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"WARN" message:@"您的会话已经过期，请重新登录" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *act = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:act];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+        // and logout
+        [self setupRightButtons];
     }
 }
 
--(void)onSetupButtonClicked:(id)sender{
+-(IBAction)onSetupAction:(id)sender{
     NSLog(@"TODO - call setup view");
 }
 
--(void)onLoginButtonClicked:(id)sender{
+-(IBAction)onLoginAction:(id)sender{
     MTLoginViewController *login = [[MTLoginViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:login animated:YES];
 //    [self.navigationController presentViewController:login animated:YES completion:^{
@@ -49,25 +105,122 @@
     NSLog(@"TODO - call setup view");
 }
 
+-(IBAction)onRegisterAction:(id)sender{
+    MTRegisterViewController *reg = [[MTRegisterViewController alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:reg animated:YES];
+    //    [self.navigationController presentViewController:login animated:YES completion:^{
+    //        // noop;
+    //    }];
+    NSLog(@"TODO - call setup view");
+}
+
+-(IBAction)onTrackAction:(id)sender{
+    if(![self checkGPSPermission]){
+        return;
+    }
+    MKMapView *map = (MKMapView*)self.view;
+    map.showsUserLocation = YES;
+    [map setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+    
+    UIBarButtonItem *btn = (UIBarButtonItem*)sender;
+    if(btn.tag == 0){
+        btn.tag = 1;
+        [self.locationManager startUpdatingLocation];
+        btn.title = @"正在跟踪";
+        
+        self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(onUpdateTimerFired:) userInfo:nil repeats:YES];
+    }else{
+        btn.tag = 0;
+        [self.updateTimer invalidate];
+        self.updateTimer = nil;
+        [self.locationManager stopUpdatingLocation];
+        btn.title = @"跟踪";
+    }
+    
+}
+
+-(void)onUpdateTimerFired:(NSTimer*)timer{
+    if(self.currentNewLocation){
+        // perform update
+        [self doUpdateLocation:self.currentNewLocation];
+        self.currentNewLocation = nil;
+    }
+}
+
+#define MAX_ERROR_RETRY_COUNT 10 // about 10 minutes
+-(void)doUpdateLocation:(CLLocation*)location{
+    static int errorCount = 0;
+#if DEBUG
+    NSLog(@"New location updated: %@",location);
+#endif
+    
+    MTrackerService *mts = [[MTrackerService alloc] init];
+    [mts updateLocation:location onCompletion:^(MTServiceCode code, NSString *message, NSDictionary *data) {
+        if(code == NO_ERROR){
+            errorCount = 0;
+            // we're done
+            return;
+        }
+        
+        if(code == SESSION_EXPIRED_ERROR || code == AUTH_DENIED_ERROR){
+            // no permission - TODO perform logout
+            NSLog(@"Session expired! %@",message);
+            [[NSNotificationCenter defaultCenter] postNotificationName:kMTNotifyDeviceLoggedOut object:nil];
+            return;
+        }else{
+            errorCount++;
+            NSLog(@"Unknown error: %@", message);
+        }
+        
+        // stop location updates
+        if(errorCount >=MAX_ERROR_RETRY_COUNT){
+            errorCount = 0;
+            [self onTrackAction:self.navigationItem.rightBarButtonItem];
+            
+            // Prompt user of the logout
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"WARN" message:@"位置更新失败，请稍后重试" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *act = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alert addAction:act];
+            [self presentViewController:alert animated:YES completion:nil];
+            
+        }
+    }];
+}
 
 -(BOOL)checkGPSPermission{
+    NSString *errorMessage = nil;
+    UIAlertController *alert = nil;
+    
+    if(![CLLocationManager locationServicesEnabled]){
+        errorMessage = @"You have to enable location service to make me happy. \r Or I'll stop working for you";
+        goto exit;
+    }
+
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     switch(status){
         case kCLAuthorizationStatusAuthorizedAlways:
             return true;
             break;
         case kCLAuthorizationStatusNotDetermined:{
-            CLLocationManager *clm = [[CLLocationManager alloc] init];
-            [clm requestAlwaysAuthorization];
+            [self.locationManager requestAlwaysAuthorization];
+            return false;
             break;
         }
         default:{
-            // alert user for the permission;
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"You have to grant app the ALWAYS access permission to  GPS to make me happy. \r Or I'll stop working for you" preferredStyle:UIAlertControllerStyleAlert];
-            [self presentViewController:alert animated:YES completion:nil];
+            errorMessage = @"You have to grant app the ALWAYS access permission to  GPS to make me happy. \r Or I'll stop working";
             break;
         }
     }
+exit:
+    // alert user for the permission;
+    alert = [UIAlertController alertControllerWithTitle:@"Error" message:errorMessage preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *act = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [alert addAction:act];
+    [self presentViewController:alert animated:YES completion:nil];
     return false;
 }
 
@@ -117,5 +270,15 @@
 //    return 0.5f;
 //}
 
+
+#pragma mark - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+//    [self checkGPSPermission];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
+    CLLocation *newLocation = [locations lastObject];
+    self.currentNewLocation = newLocation;
+}
 
 @end

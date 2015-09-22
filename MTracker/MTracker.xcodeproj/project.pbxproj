@@ -32,6 +32,8 @@
 		298C5A3D1BAE81A800DD373A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 298C5A3B1BAE81A800DD373A /* Main.storyboard */; };
 		298C5A3F1BAE81A800DD373A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 298C5A3E1BAE81A800DD373A /* Assets.xcassets */; };
 		298C5A421BAE81A800DD373A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 298C5A401BAE81A800DD373A /* LaunchScreen.storyboard */; };
+		29CD482E1BAFD8CE00CF3E8A /* MTrackerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CD482D1BAFD8CE00CF3E8A /* MTrackerService.m */; settings = {ASSET_TAGS = (); }; };
+		29CD48321BAFEE2600CF3E8A /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CD48311BAFEE2600CF3E8A /* MBProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
 		29DE765C1BAEFFB500D606D0 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 29DE76591BAEFFB500D606D0 /* SRWebSocket.m */; settings = {ASSET_TAGS = (); }; };
 		29DE765F1BAF000300D606D0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DE765E1BAF000300D606D0 /* CFNetwork.framework */; };
 		29DE76611BAF001E00D606D0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DE76601BAF001E00D606D0 /* CoreLocation.framework */; };
@@ -48,6 +50,8 @@
 		29DE768A1BAF013500D606D0 /* QServiceProtocol_JOYAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 29DE767E1BAF013500D606D0 /* QServiceProtocol_JOYAPI.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		29DE76901BAF02A700D606D0 /* SCLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 29DE768F1BAF02A700D606D0 /* SCLogger.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		29DE76941BAF036C00D606D0 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 29DE76931BAF036C00D606D0 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		29EEDDC91BB1409200964CB3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29EEDDC81BB1409200964CB3 /* CoreTelephony.framework */; };
+		29EEDDCE1BB149BD00964CB3 /* entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29EEDDCD1BB149BD00964CB3 /* entitlements.plist */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +98,10 @@
 		298C5A3E1BAE81A800DD373A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		298C5A411BAE81A800DD373A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		298C5A431BAE81A800DD373A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29CD482C1BAFD8CE00CF3E8A /* MTrackerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTrackerService.h; sourceTree = "<group>"; };
+		29CD482D1BAFD8CE00CF3E8A /* MTrackerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTrackerService.m; sourceTree = "<group>"; };
+		29CD48301BAFEE2600CF3E8A /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		29CD48311BAFEE2600CF3E8A /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		29DE76581BAEFFB500D606D0 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		29DE76591BAEFFB500D606D0 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
 		29DE765E1BAF000300D606D0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -125,6 +133,10 @@
 		29DE768F1BAF02A700D606D0 /* SCLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLogger.m; sourceTree = "<group>"; };
 		29DE76921BAF036C00D606D0 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		29DE76931BAF036C00D606D0 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		29EEDDC71BB13FF800964CB3 /* Private_NetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Private_NetworkController.h; sourceTree = "<group>"; };
+		29EEDDC81BB1409200964CB3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		29EEDDCA1BB140E000964CB3 /* Private_CoreTelephony.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Private_CoreTelephony.h; sourceTree = "<group>"; };
+		29EEDDCD1BB149BD00964CB3 /* entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29EEDDC91BB1409200964CB3 /* CoreTelephony.framework in Frameworks */,
 				29DE76651BAF00B100D606D0 /* libicucore.tbd in Frameworks */,
 				29DE76631BAF005800D606D0 /* Security.framework in Frameworks */,
 				29DE76611BAF001E00D606D0 /* CoreLocation.framework in Frameworks */,
@@ -146,10 +159,17 @@
 		290C07F21BAEBCC400DBE8B1 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				29EEDDC61BB13FF800964CB3 /* PrivateFrameworks */,
+				29CD482F1BAFEE2600CF3E8A /* MBProgressHUD */,
 				29DE76661BAF013500D606D0 /* ServiceToolKit */,
 				29DE76571BAEFFB500D606D0 /* SocketRocket */,
-				290C07DC1BAEB35F00DBE8B1 /* MapKit.framework */,
 				290C07FD1BAEBFB000DBE8B1 /* AMSlideMenu */,
+				29DE76621BAF005800D606D0 /* Security.framework */,
+				29DE76601BAF001E00D606D0 /* CoreLocation.framework */,
+				29DE765E1BAF000300D606D0 /* CFNetwork.framework */,
+				290C07DC1BAEB35F00DBE8B1 /* MapKit.framework */,
+				29EEDDC81BB1409200964CB3 /* CoreTelephony.framework */,
+				29DE76641BAF00B100D606D0 /* libicucore.tbd */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -180,10 +200,6 @@
 		298C5A261BAE81A800DD373A = {
 			isa = PBXGroup;
 			children = (
-				29DE76641BAF00B100D606D0 /* libicucore.tbd */,
-				29DE76621BAF005800D606D0 /* Security.framework */,
-				29DE76601BAF001E00D606D0 /* CoreLocation.framework */,
-				29DE765E1BAF000300D606D0 /* CFNetwork.framework */,
 				298C5A311BAE81A800DD373A /* MTracker */,
 				298C5A301BAE81A800DD373A /* Products */,
 				290C07F21BAEBCC400DBE8B1 /* Libraries */,
@@ -201,6 +217,7 @@
 		298C5A311BAE81A800DD373A /* MTracker */ = {
 			isa = PBXGroup;
 			children = (
+				29CD482B1BAFD8CE00CF3E8A /* Service */,
 				290C07F71BAEBEA800DBE8B1 /* MTrackerPrefixHeader.pch */,
 				298C5A351BAE81A800DD373A /* AppDelegate.h */,
 				298C5A361BAE81A800DD373A /* AppDelegate.m */,
@@ -230,6 +247,7 @@
 		298C5A321BAE81A800DD373A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				29EEDDCD1BB149BD00964CB3 /* entitlements.plist */,
 				290C08491BAEC3D400DBE8B1 /* icon-menu.png */,
 				290C084A1BAEC3D400DBE8B1 /* icon-menu@2x.png */,
 				290C07F51BAEBDAE00DBE8B1 /* Default-568h@2x.png */,
@@ -237,6 +255,25 @@
 				298C5A331BAE81A800DD373A /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		29CD482B1BAFD8CE00CF3E8A /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				29CD482C1BAFD8CE00CF3E8A /* MTrackerService.h */,
+				29CD482D1BAFD8CE00CF3E8A /* MTrackerService.m */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		29CD482F1BAFEE2600CF3E8A /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				29CD48301BAFEE2600CF3E8A /* MBProgressHUD.h */,
+				29CD48311BAFEE2600CF3E8A /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			path = Libraries/MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		29DE76571BAEFFB500D606D0 /* SocketRocket */ = {
@@ -314,6 +351,16 @@
 			path = JSONKit;
 			sourceTree = "<group>";
 		};
+		29EEDDC61BB13FF800964CB3 /* PrivateFrameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29EEDDC71BB13FF800964CB3 /* Private_NetworkController.h */,
+				29EEDDCA1BB140E000964CB3 /* Private_CoreTelephony.h */,
+			);
+			name = PrivateFrameworks;
+			path = Libraries/PrivateFrameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -345,6 +392,15 @@
 				TargetAttributes = {
 					298C5A2E1BAE81A800DD373A = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = H96PB6894F;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -372,6 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				290C07EC1BAEBA9E00DBE8B1 /* MTLoginViewController.xib in Resources */,
+				29EEDDCE1BB149BD00964CB3 /* entitlements.plist in Resources */,
 				298C5A421BAE81A800DD373A /* LaunchScreen.storyboard in Resources */,
 				290C084C1BAEC3D400DBE8B1 /* icon-menu@2x.png in Resources */,
 				298C5A3F1BAE81A800DD373A /* Assets.xcassets in Resources */,
@@ -402,6 +459,7 @@
 				29DE76831BAF013500D606D0 /* QServiceHttpConnector.m in Sources */,
 				290C08471BAEC36900DBE8B1 /* AMSlideMenuRightTableViewController.m in Sources */,
 				29DE76881BAF013500D606D0 /* QServiceRequest.m in Sources */,
+				29CD482E1BAFD8CE00CF3E8A /* MTrackerService.m in Sources */,
 				290C08441BAEC36900DBE8B1 /* AMSlideMenuLeftTableViewController.m in Sources */,
 				290C08461BAEC36900DBE8B1 /* AMSlideMenuRightMenuSegue.m in Sources */,
 				290C08421BAEC36900DBE8B1 /* AMSlideMenuContentSegue.m in Sources */,
@@ -417,6 +475,7 @@
 				290C082D1BAEC0CC00DBE8B1 /* MTMenuViewController.m in Sources */,
 				29DE76941BAF036C00D606D0 /* JSONKit.m in Sources */,
 				290C07EB1BAEBA9E00DBE8B1 /* MTLoginViewController.m in Sources */,
+				29CD48321BAFEE2600CF3E8A /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,7 +518,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiao Qian (DAAHYQ6ZVS)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -503,7 +562,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Alibaba(China)Technology Co., Ltd.";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -528,12 +587,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MTracker/MTrackerPrefixHeader.pch;
 				INFOPLIST_FILE = MTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = MClub.MTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = mteam.beta.MTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -542,12 +604,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MTracker/MTrackerPrefixHeader.pch;
 				INFOPLIST_FILE = MTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = MClub.MTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = mteam.beta.MTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

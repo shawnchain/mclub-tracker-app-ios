@@ -9,9 +9,9 @@
 #ifndef MServiceToolkit_h
 #define MServiceToolkit_h
 
-#import "MServiceRequest.h"
-#import "MServiceEndpoint.h"
-#import "MServiceModel.h"
+#import "QServiceRequest.h"
+#import "QServiceEndpoint.h"
+#import "QServiceModel.h"
 
 
 /////////////////////////////////////////////

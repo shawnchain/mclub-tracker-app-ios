@@ -11,11 +11,11 @@
 @class QServiceRequest;
 
 /////////////////////////////////////////////
-#pragma mark - MServiceRequestDelegate protocol
+#pragma mark - QServiceRequestDelegate protocol
 /**
- * MServiceRequest delegate protocol.
+ * QServiceRequest delegate protocol.
  */
-@protocol MServiceRequestDelegate<NSObject>
+@protocol QServiceRequestDelegate<NSObject>
 
 
 -(void)request:(QServiceRequest*)request completedWithObject:(id)returnObject;
@@ -35,22 +35,22 @@
 
 
 /////////////////////////////////////////////
-#pragma mark - MServiceRequestBlockDelegate
+#pragma mark - QServiceRequestBlockDelegate
 
-typedef void (^MServiceRequestCompleteBlock)(QServiceRequest *request, id returnObject);
-typedef void (^MServiceRequestFailBlock)(QServiceRequest *request, NSError *error);
-typedef void (^MServiceRequestUpdateBlock)(QServiceRequest *request, double updateProgress);
-typedef void (^MServiceRequestCancelBlock)(QServiceRequest *request, NSString *reason);
+typedef void (^QServiceRequestCompleteBlock)(QServiceRequest *request, id returnObject);
+typedef void (^QServiceRequestErrorBlock)(QServiceRequest *request, NSError *error);
+typedef void (^QServiceRequestUpdateBlock)(QServiceRequest *request, double updateProgress);
+typedef void (^QServiceRequestCancelBlock)(QServiceRequest *request, NSString *reason);
 
 /*
  * MServiceDelegate implementation that callbacks to fine-grained blockers when service returns
  */
-@interface MServiceRequestBlockDelegate:NSObject<MServiceRequestDelegate>
+@interface QServiceRequestBlockDelegate:NSObject<QServiceRequestDelegate>
 
-@property (nonatomic,copy) MServiceRequestCompleteBlock completeBlock;
-@property (nonatomic,copy) MServiceRequestFailBlock failBlock;
-@property (nonatomic,copy) MServiceRequestUpdateBlock updateBlock;
-@property (nonatomic,copy) MServiceRequestCancelBlock cancelBlock;
+@property (nonatomic,copy) QServiceRequestCompleteBlock completeBlock;
+@property (nonatomic,copy) QServiceRequestErrorBlock failBlock;
+@property (nonatomic,copy) QServiceRequestUpdateBlock updateBlock;
+@property (nonatomic,copy) QServiceRequestCancelBlock cancelBlock;
 
 /*
  * Create a delegate with finish clalback blocker and update blocker
@@ -60,9 +60,9 @@ typedef void (^MServiceRequestCancelBlock)(QServiceRequest *request, NSString *r
  *
  * @returns id<MServiceDelegate>
  */
-+(id<MServiceRequestDelegate>)delegateWithCompleteBlock:(MServiceRequestCompleteBlock)completeBlock failBlock:(MServiceRequestFailBlock)failBlock updateBlock:(MServiceRequestUpdateBlock)updatedBlock cancelBlock:(MServiceRequestCancelBlock)cancelBlock;
-+(id<MServiceRequestDelegate>)delegateWithCompleteBlock:(MServiceRequestCompleteBlock)completeBlock failBlock:(MServiceRequestFailBlock)failBlock;
-+(id<MServiceRequestDelegate>)delegateWithCompleteBlock:(MServiceRequestCompleteBlock)completeBlock;
++(id<QServiceRequestDelegate>)delegateWithCompleteBlock:(QServiceRequestCompleteBlock)completeBlock failBlock:(QServiceRequestErrorBlock)failBlock updateBlock:(QServiceRequestUpdateBlock)updatedBlock cancelBlock:(QServiceRequestCancelBlock)cancelBlock;
++(id<QServiceRequestDelegate>)delegateWithCompleteBlock:(QServiceRequestCompleteBlock)completeBlock failBlock:(QServiceRequestErrorBlock)failBlock;
++(id<QServiceRequestDelegate>)delegateWithCompleteBlock:(QServiceRequestCompleteBlock)completeBlock;
 @end
 
 
@@ -70,11 +70,11 @@ typedef void (^MServiceRequestCancelBlock)(QServiceRequest *request, NSString *r
 
 
 /////////////////////////////////////////////
-#pragma mark - MServiceRequestSelectorDelegate
+#pragma mark - QServiceRequestSelectorDelegate
 /*
  * MServiceRequestSelectorDelegate implementation that callbacks to fine-grained selectors when service returns
  */
-@interface MServiceRequestSelectorDelegate:NSObject<MServiceRequestDelegate> {
+@interface QServiceRequestSelectorDelegate:NSObject<QServiceRequestDelegate> {
 }
 /*
  * target object
@@ -87,7 +87,7 @@ typedef void (^MServiceRequestCancelBlock)(QServiceRequest *request, NSString *r
 /**
  * failed callback selector
  */
-@property(nonatomic,assign) SEL failSelector;
+@property(nonatomic,assign) SEL errorSelector;
 /**
  * updated callback selector
  */
@@ -96,15 +96,15 @@ typedef void (^MServiceRequestCancelBlock)(QServiceRequest *request, NSString *r
 @property(nonatomic,assign) SEL cancelSelector;
 
 
-+(id<MServiceRequestDelegate>)delegateWithTarget:(id)target completeSelector:(SEL)completeSelector failSelector:(SEL)failSelector updateSelector:(SEL)updateSelector cancelSelector:(SEL)cancelSelector;
++(id<QServiceRequestDelegate>)delegateWithTarget:(id)target completeSelector:(SEL)completeSelector failSelector:(SEL)failSelector updateSelector:(SEL)updateSelector cancelSelector:(SEL)cancelSelector;
 
 /**
  * dispatch callbacks to different selectors
  */
-+(id<MServiceRequestDelegate>)delegateWithTarget:(id)target completeSelector:(SEL)completeSelector failSelector:(SEL)failSelector;
++(id<QServiceRequestDelegate>)delegateWithTarget:(id)target completeSelector:(SEL)completeSelector failSelector:(SEL)failSelector;
 
 
-+(id<MServiceRequestDelegate>)delegateWithTarget:(id)target completeSelector:(SEL)completeSelector;
++(id<QServiceRequestDelegate>)delegateWithTarget:(id)target completeSelector:(SEL)completeSelector;
 @end
 
 
@@ -120,7 +120,7 @@ typedef enum {
     MServiceRequestStatusPending = 1,
     MServiceRequestStatusFinished = 2,
     MServiceRequestStatusCanceled = 3
-}MServiceRequestStatus;
+}QServiceRequestStatus;
 
 /**
  * Service Request Object
@@ -143,7 +143,7 @@ typedef enum {
 /*
  *
  */
-@property(nonatomic,strong)id<MServiceRequestDelegate> delegate;
+@property(nonatomic,strong)id<QServiceRequestDelegate> delegate;
 
 
 /*
@@ -158,15 +158,15 @@ typedef enum {
 /*
  *
  */
-@property(nonatomic, assign)MServiceRequestCompleteBlock completeBlock;
+@property(nonatomic, assign)QServiceRequestCompleteBlock completeBlock;
 /*
  *
  */
-@property(nonatomic, assign)MServiceRequestFailBlock failBlock;
+@property(nonatomic, assign)QServiceRequestErrorBlock failBlock;
 /*
  *
  */
-@property(nonatomic, assign)MServiceRequestUpdateBlock updateBlock;
+@property(nonatomic, assign)QServiceRequestUpdateBlock updateBlock;
 /*
  *
  */
@@ -189,7 +189,7 @@ typedef enum {
 /*
  *
  */
-@property(nonatomic,readonly,assign)MServiceRequestStatus status;
+@property(nonatomic,readonly,assign)QServiceRequestStatus status;
 
 /*
  * Customized user data
@@ -204,7 +204,7 @@ typedef enum {
 /*
  * Construct service request
  */
-+(QServiceRequest*)requestForOperation:(NSString*)opName returnType:(Class)returnType delegate:(id<MServiceRequestDelegate>)delegate;
++(QServiceRequest*)requestForOperation:(NSString*)opName returnType:(Class)returnType delegate:(id<QServiceRequestDelegate>)delegate;
 
 /*
  * Construct service request
@@ -215,7 +215,7 @@ typedef enum {
 /*
  *
  */
-+(QServiceRequest*)requestForOperation:(NSString*)opName returnType:(Class)returnType completeBlock:(MServiceRequestCompleteBlock)completeBlock failBlock:(MServiceRequestFailBlock)failBlock;
++(QServiceRequest*)requestForOperation:(NSString*)opName returnType:(Class)returnType completeBlock:(QServiceRequestCompleteBlock)completeBlock failBlock:(QServiceRequestErrorBlock)failBlock;
 
 
 /*

@@ -24,7 +24,7 @@ NSString* const kMSERVICE_ERROR_DOMAIN = @"MServiceErrorDomain";
 NSString* const kMSERVICE_SETTINGS_API_ROOT_KEY = @"mservice_settings_api_root";
 NSString* const kMSERVICE_SETTINGS_ACCESS_TOKEN_KEY = @"mservice_settings_access_token";
 
-#pragma mark - MServiceEndpoint
+#pragma mark - QServiceEndpoint
 @implementation QServiceEndpoint
 
 @synthesize URLString = _URLString;

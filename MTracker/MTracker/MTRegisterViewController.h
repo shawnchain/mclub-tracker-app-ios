@@ -15,4 +15,10 @@
 @property (strong, nonatomic) IBOutlet UITextField *txtDisplayName;
 @property (strong, nonatomic) IBOutlet UITextField *txtPassword;
 
+@property (assign, nonatomic) BOOL hideLoginButton;
+
+-(IBAction)onCancelAction:(id)sender;
+
+-(IBAction)onRegisterAction:(id)sender;
+
 @end

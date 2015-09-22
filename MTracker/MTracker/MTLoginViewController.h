@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+FOUNDATION_EXPORT NSString *const kMTNotifyDeviceLoggedIn;
+FOUNDATION_EXPORT NSString *const kMTNotifyDeviceLoggedOut;
+
 @interface MTLoginViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UITextField *txtUsername;
 @property (strong, nonatomic) IBOutlet UITextField *txtPassword;
-
+@property (assign, nonatomic) BOOL hideRegisterButton;
 @end

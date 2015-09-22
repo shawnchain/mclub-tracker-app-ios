@@ -7,9 +7,16 @@
 //
 
 #import "MTLoginViewController.h"
+#import "MBProgressHUD.h"
+#import "MTrackerService.h"
+#import "MTRegisterViewController.h"
 
-@interface MTLoginViewController ()
+NSString *const kMTNotifyDeviceLoggedIn = @"kMTNotifyDeviceLoggedIn";
 
+NSString *const kMTNotifyDeviceLoggedOut = @"kMTNotifyDeviceLoggedOut";
+
+@interface MTLoginViewController () <MBProgressHUDDelegate>
+@property(strong,nonatomic) MBProgressHUD *progressHUD;
 @end
 
 @implementation MTLoginViewController
@@ -19,7 +26,17 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"登录";
     [self.navigationItem setHidesBackButton:YES];
-    
+
+    if(!self.hideRegisterButton){
+        // show the register button
+        UIBarButtonItem *reg = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStylePlain target:self action:@selector(onRegisterAction:)];
+        self.navigationItem.rightBarButtonItem = reg;
+    }
+
+    // load saved user name if any
+    NSString *savedUsername = [[MTrackerService sharedInstance] getConfig:kMTConfigUsername];
+    if(savedUsername)
+        self.txtUsername.text = savedUsername;
     [self.txtUsername becomeFirstResponder];
 }
 
@@ -30,22 +47,57 @@
 
 
 -(IBAction)onCancelAction:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
-    //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    //[self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 -(IBAction)onLoginAction:(id)sender{
-    NSLog(@"TODO - perform login");
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:hud];
+    hud.delegate = self;
+    hud.labelText = @"登录中";
+    [hud show:YES];
+    self.progressHUD = hud;
+    
+    MTrackerService *mts = [MTrackerService sharedInstance];
+    if(self.txtUsername.text.length > 0){
+        [mts setConfig:kMTConfigUsername value:self.txtUsername.text];
+    }
+    [mts setConfig:kMTConfigServiceToken value:@""];
+    [mts login:self.txtUsername.text password:self.txtPassword.text onCompletion:^(MTServiceCode code, NSString *message, NSDictionary *data) {
+        if(code == NO_ERROR){
+            NSString *token = data[@"token"];
+            if(token){
+                [mts setConfig:kMTConfigServiceToken value:token];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kMTNotifyDeviceLoggedIn object:data];
+                self.progressHUD.tag = 1; // should return
+                [self.progressHUD hide:YES];
+                return;
+            }
+        }
+        NSLog(@"Login failed, %@",message);
+        self.progressHUD.labelText = @"登录失败";
+        if(message) self.progressHUD.detailsLabelText = message;
+        [self.progressHUD hide:YES afterDelay:3];
+    }];
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(IBAction)onRegisterAction:(id)sender{
+    MTRegisterViewController *reg = [[MTRegisterViewController alloc] initWithNibName:nil bundle:nil];
+    reg.hideLoginButton = YES;
+    [self.navigationController pushViewController:reg animated:YES];
 }
-*/
+
+
+#pragma mark - Progress HUD callback
+- (void)hudWasHidden:(MBProgressHUD *)hud{
+    BOOL shouldReturn = self.progressHUD.tag == 1;
+    [self.progressHUD removeFromSuperViewOnHide];
+    self.progressHUD = nil;
+    if(shouldReturn){
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}
 
 @end
