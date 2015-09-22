@@ -16,6 +16,7 @@
 @implementation MTrackerService
 
 NSString *const kMTConfigUsername = @"kMTConfigUsername";
+NSString *const kMTConfigDisplayName = @"kMTConfigDiplayName";
 NSString *const kMTConfigPassword = @"kMTConfigPassword";
 NSString *const kMTConfigServiceToken = @"kMTConfigServiceToken";
 NSString *const kMTConfigServiceRootURL = @"kMTConfigServiceRootURL";
@@ -137,5 +138,24 @@ NSString *const defaultServiceRootURL = @"http://aprs2.mclub.to:20880/mtracker/a
     
     [self.endpoint sendRequest:req];
 
+}
+
+-(void) loadUserInfo:(MTServiceCompletionCallback)callback{
+    NSAssert(callback != nil,@"callback is nil");
+    QServiceRequest *req = [QServiceRequest requestForOperation:@"/user" returnType:[NSDictionary class] completeBlock:^(QServiceRequest *request, NSDictionary* result) {
+        NSNumber *code = result[@"code"];
+        NSString *message = result[@"message"];
+        NSLog(@"login result: %@, %@, %@",code, message, result);
+        if(callback)callback(code.intValue,message,result);
+    } failBlock:^(QServiceRequest *request, NSError *error) {
+        //error(request,error);
+        NSLog(@"login error: %@",error);
+        NSDictionary *dict = @{@"error":error};
+        if(callback)callback(NETWORK_ERROR,@"Network error",dict);
+    }];
+    
+    NSString *token = [self getConfig:kMTConfigServiceToken];
+    [req addPostValueString:token forKey:@"token"];
+    [self.endpoint sendRequest:req];
 }
 @end

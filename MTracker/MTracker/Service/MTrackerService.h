@@ -10,6 +10,7 @@
 #import "QServiceToolKit.h"
 
 FOUNDATION_EXPORT NSString *const kMTConfigUsername;
+FOUNDATION_EXPORT NSString *const kMTConfigDisplayName;
 FOUNDATION_EXPORT NSString *const kMTConfigPassword;
 FOUNDATION_EXPORT NSString *const kMTConfigServiceToken;
 FOUNDATION_EXPORT NSString *const kMTConfigServiceRootURL;
@@ -41,6 +42,8 @@ typedef void (^MTServiceCompletionCallback)(MTServiceCode code, NSString* messag
 -(void) regist:(NSString*)udid dispName:(NSString*)dispName password:(NSString*)password phone:(NSString*)phone onCompletion:(MTServiceCompletionCallback)callback;
 
 -(void) updateLocation:(CLLocation*)location onCompletion:(MTServiceCompletionCallback)callback;
+
+-(void) loadUserInfo:(MTServiceCompletionCallback)callback;
 
 -(NSString*) getDeviceId;
 @end

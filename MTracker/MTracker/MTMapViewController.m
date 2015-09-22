@@ -71,6 +71,21 @@
             self.navigationItem.rightBarButtonItem = track;
             self.title = [NSString stringWithFormat:@"%@",username];
         }
+        
+        // load user settings
+        [mts loadUserInfo:^(MTServiceCode code, NSString *message, NSDictionary *data) {
+            if(code == NO_ERROR){
+                // refresh user settings
+                NSDictionary *userInfo = data[@"user"];
+                NSString *displayName = userInfo[@"displayName"];
+                [mts setConfig:kMTConfigDisplayName value:displayName];
+                if(displayName){
+                    self.title = displayName;
+                }
+                //NSString *avatar = data[@"avatar"];
+            }
+        }];
+        
     }else if(notify.name == kMTNotifyDeviceLoggedOut){
         // Remove the token
         [[MTrackerService sharedInstance] setConfig:kMTConfigServiceToken value:nil];
