@@ -14,11 +14,14 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
+#import "MTSmartBeaconFilter.h"
 
 @interface MTMapViewController () <MKMapViewDelegate,CLLocationManagerDelegate>
 @property(strong,nonatomic) CLLocationManager *locationManager;
 @property(strong,atomic) CLLocation *currentNewLocation;
 @property(strong,nonatomic) NSTimer *updateTimer;
+
+@property(strong,nonatomic) MTSmartBeaconFilter *smartBeaconFilter;
 @end
 
 @implementation MTMapViewController
@@ -41,6 +44,9 @@
     locMan.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
     self.locationManager = locMan;
 
+    // Use smartbeaconf ilter
+    self.smartBeaconFilter = [[MTSmartBeaconFilter alloc] init];
+    self.smartBeaconFilter.enableSmartCheck = YES;
 }
 
 -(void)setupRightButtons{
@@ -143,7 +149,9 @@
         [self.locationManager startUpdatingLocation];
         btn.title = @"正在跟踪";
         
-        self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(onUpdateTimerFired:) userInfo:nil repeats:YES];
+        // The timer will check every 1s, because we have smart beacon filter applied in the locatio update callback function.
+        #define UPDATE_TIMER_INTERVAL 1
+        self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_TIMER_INTERVAL target:self selector:@selector(onUpdateTimerFired:) userInfo:nil repeats:YES];
     }else{
         btn.tag = 0;
         [self.updateTimer invalidate];
@@ -293,7 +301,9 @@ exit:
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
     CLLocation *newLocation = [locations lastObject];
-    self.currentNewLocation = newLocation;
+    if([self.smartBeaconFilter accept:newLocation]){
+        self.currentNewLocation = newLocation;
+    }
 }
 
 @end
