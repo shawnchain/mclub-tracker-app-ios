@@ -22,9 +22,10 @@ NSString *const kMTConfigServiceToken = @"kMTConfigServiceToken";
 NSString *const kMTConfigServiceRootURL = @"kMTConfigServiceRootURL";
 
 #if 0
-NSString *const defaultServiceRootURL = @"http://10.2.100.21:8080/mclub/api";
+NSString *const defaultServiceRootURL = @"http://localhost:8080/mclub/api";
 #else
-NSString *const defaultServiceRootURL = @"http://aprs2.mclub.to:20880/mtracker/api";
+//NSString *const defaultServiceRootURL = @"http://aprs2.mclub.to:20880/mtracker/api";
+NSString *const defaultServiceRootURL = @"https://aprs.hamclub.net/mtracker/api";
 #endif
 
 +(MTrackerService*)sharedInstance{
@@ -77,8 +78,16 @@ NSString *const defaultServiceRootURL = @"http://aprs2.mclub.to:20880/mtracker/a
     
     [req addPostValueString:username forKey:@"username"];
     [req addPostValueString:password forKey:@"password"];
+    // append the device id
+    NSString *udid = [[self loadDeviceIDString] substringFromIndex:24];
+    [req addPostValueString:udid forKey:@"udid"];
     
     [self.endpoint sendRequest:req];
+}
+
+-(NSString*) loadDeviceIDString{
+    NSUUID *udid = [UIDevice currentDevice].identifierForVendor;
+    return udid.UUIDString;
 }
 
 -(void) regist:(NSString*)udid dispName:(NSString*)dispName password:(NSString*)password phone:(NSString*)phone onCompletion:(MTServiceCompletionCallback)callback;{
