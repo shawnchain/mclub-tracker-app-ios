@@ -187,6 +187,7 @@ static bool _smart_beacon_check(Location *location){
         loc.altitude = location.altitude;
         loc.speedInKMH = location.speed  * 3.6f;
         loc.heading = location.course;
+        loc.timestamp = [location.timestamp timeIntervalSince1970];
         
         shouldAccept = _smart_beacon_check(&loc);
         if(shouldAccept){
