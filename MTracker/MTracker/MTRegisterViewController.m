@@ -10,8 +10,13 @@
 #import "MTLoginViewController.h"
 #import "MBProgressHUD.h"
 #import "MTrackerService.h"
+
+#define USE_PRIVATE_API 0
+
+#if USE_PRIVATE_API
 #import "Private_NetworkController.h"
 #import "Private_CoreTelephony.h"
+#endif
 
 
 @interface MTRegisterViewController ()<MBProgressHUDDelegate>
@@ -58,11 +63,20 @@
     return nil;
 }
 -(NSString*) loadDeviceIMSI{
+#if USE_PRIVATE_API
     return CTSIMSupportCopyMobileSubscriberIdentity();
+#else
+    return nil;
+#endif
 }
 
+
 -(NSString*) loadDevicePhoneNumber{
+#if USE_PRIVATE_API
     return CTSettingCopyMyPhoneNumber();
+#else
+    return nil;
+#endif
 }
 
 -(NSString*) loadDeviceIDString{
