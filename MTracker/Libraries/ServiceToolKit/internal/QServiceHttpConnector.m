@@ -1,5 +1,5 @@
 //
-//  MServiceHttpConnector.m
+//  QServiceHttpConnector.m
 //
 //  Created by Shawn Chain on 12-1-3.
 //  Copyright 2012 shawn.chain@gmail.com, Alibaba Group
@@ -226,7 +226,7 @@
     long long expectedContentLength = [_currentRequest.httpResponse expectedContentLength];
     NSMutableData* respData = _currentRequest.responseData;
     if(!respData){
-        NSUInteger bufferSize = (expectedContentLength > 0 &&  expectedContentLength < DEFAULT_DATA_BUFFER_SIZE)?expectedContentLength:DEFAULT_DATA_BUFFER_SIZE;
+        NSUInteger bufferSize = (expectedContentLength > 0 &&  expectedContentLength < DEFAULT_DATA_BUFFER_SIZE)?(NSUInteger)expectedContentLength:DEFAULT_DATA_BUFFER_SIZE;
         respData = [[NSMutableData alloc] initWithCapacity:bufferSize];
         _currentRequest.responseData = respData;
         [respData release];

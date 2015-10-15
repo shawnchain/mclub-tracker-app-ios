@@ -1,5 +1,5 @@
 //
-//  MServiceConnection-Internal.h
+//  QServiceConnection-Internal.h
 //  
 //  Created by Shawn Chain on 12-1-3.
 //  Copyright 2012 shawn.chain@gmail.com, Alibaba Group
@@ -13,10 +13,10 @@
 
 /////////////////////////////////////////////
 // Service content type
-extern NSString* const kMService_HTTP_METHOD_GET;
-extern NSString* const kMService_HTTP_METHOD_POST;
-extern NSString* const kMSERVICE_CONTENT_TYPE_FORM;
-extern NSString* const kMSERVICE_CONTENT_TYPE_JSON;
+extern NSString* const kQService_HTTP_METHOD_GET;
+extern NSString* const kQService_HTTP_METHOD_POST;
+extern NSString* const kQSERVICE_CONTENT_TYPE_FORM;
+extern NSString* const kQSERVICE_CONTENT_TYPE_JSON;
 
 
 /*
@@ -52,11 +52,11 @@ extern NSString* const kMSERVICE_CONTENT_TYPE_JSON;
 @interface QServiceEndpoint()
 
 @property(nonatomic,strong) QServiceHttpConnector *connector;
-//@property(nonatomic,strong) MServiceProtocol *protocol;
+//@property(nonatomic,strong) QerviceProtocol *protocol;
 @property(nonatomic,strong) NSMutableArray *filters;
 
-//@property(nonatomic,strong) id<MServiceEndpointDelegate> delegate;
-//@property(nonatomic,strong) id<MServiceEndpointAuthDelegate> authDelegate;
+//@property(nonatomic,strong) id<QServiceEndpointDelegate> delegate;
+//@property(nonatomic,strong) id<QServiceEndpointAuthDelegate> authDelegate;
 
 // Internal callbacks by connectors
 -(void)_cancelRequest:(QServiceRequest*)request;
@@ -65,15 +65,15 @@ extern NSString* const kMSERVICE_CONTENT_TYPE_JSON;
 @end
 
 /*
- * MService model internals
+ * QService model internals
  */
-@interface MServicePageResult()
+@interface QServicePageResult()
 @property(nonatomic,assign) NSInteger size;
 @property(nonatomic,assign) NSInteger offset;
 @property(nonatomic,strong) NSArray* items;
 @end
 
-@interface MServiceError()
+@interface QServiceError()
     @property(nonatomic,strong) NSString* code;
     @property(nonatomic,strong) NSString* message;
     @property(nonatomic,strong) NSString* desc;

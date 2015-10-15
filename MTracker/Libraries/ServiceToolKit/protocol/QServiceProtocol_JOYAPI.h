@@ -1,6 +1,5 @@
 //
-//  MServiceProtocol_JOYAPI.h
-//  JoyMaps
+//  QServiceProtocol_JOYAPI.h
 //
 //  Created by Shawn Chain on 13-4-20.
 //  Copyright (c) 2013年 taobao inc. All rights reserved.

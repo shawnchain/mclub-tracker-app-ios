@@ -1,5 +1,5 @@
 //
-//  MServiceHttpConnector.h
+//  QServiceHttpConnector.h
 //
 //  Created by Shawn Chain on 12-1-3.
 //  Copyright 2012 shawn.chain@gmail.com, Alibaba Group

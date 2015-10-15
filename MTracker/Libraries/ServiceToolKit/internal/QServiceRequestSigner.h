@@ -1,6 +1,5 @@
 //
-//  MServiceRequestSigner.h
-//  AppManagerClient
+//  QServiceRequestSigner.h
 //
 //  Created by Shawn Chain on 13-2-10.
 //  Copyright (c) 2013年 JoyLabs. All rights reserved.

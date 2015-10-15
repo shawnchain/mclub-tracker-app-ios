@@ -1,6 +1,5 @@
 //
-//  MServiceProtocol_JOYAPI.m
-//  JoyMaps
+//  QServiceProtocol_JOYAPI.m
 //
 //  Created by Shawn Chain on 13-4-20.
 //  Copyright (c) 2013年 taobao inc. All rights reserved.
@@ -103,7 +102,7 @@
     id array = [dict valueForKey:@"items"];
     if(array != nil){
         if([array isKindOfClass:[NSArray class]]){
-            MServicePageResult *page = [[[MServicePageResult alloc] init]autorelease];
+            QServicePageResult *page = [[[QServicePageResult alloc] init]autorelease];
             page.size = [[dict objectForKey:@"size"] integerValue];
             page.offset = [[dict objectForKey:@"offset"] integerValue];
             page.items = [self _unmarshallPlainResult:array type:type];
@@ -125,7 +124,7 @@
     // 1. empty
     if(!data){
         // just the error code
-        ticket.error = [NSError errorWithDomain:kMSERVICE_ERROR_DOMAIN code:ticket.httpResponse.statusCode userInfo:nil];
+        ticket.error = [NSError errorWithDomain:kQSERVICE_ERROR_DOMAIN code:ticket.httpResponse.statusCode userInfo:nil];
         return;
     }
     
@@ -146,15 +145,15 @@
     if(dict != nil && [dict isKindOfClass:[NSDictionary class]]){
         id array = [dict objectForKey:@"errors"];
         if(array){
-            id errors = [self _unmarshallPlainResult:array type:[MServiceError class]];
+            id errors = [self _unmarshallPlainResult:array type:[QServiceError class]];
             if([errors isKindOfClass:[NSArray class]]){
                 NSArray *errorArray = (NSArray*)errors;
                 if([errors count] >0){
                     // just get the first error currently,currently
-                    MServiceError *error = [errorArray objectAtIndex:0];
+                    QServiceError *error = [errorArray objectAtIndex:0];
                     NSString *errMsg = [NSString stringWithFormat:@"%@ %@ %@",error.code, error.message,error.desc];
                     NSDictionary *errorInfo = [NSDictionary dictionaryWithObjectsAndKeys:errMsg,NSLocalizedDescriptionKey,error,@"serviceError",nil];
-                    ticket.error = [NSError errorWithDomain:kMSERVICE_ERROR_DOMAIN code:ticket.httpResponse.statusCode userInfo:errorInfo];
+                    ticket.error = [NSError errorWithDomain:kQSERVICE_ERROR_DOMAIN code:ticket.httpResponse.statusCode userInfo:errorInfo];
                     return;
                 }
             }
@@ -168,10 +167,10 @@
     // 2. Not a json string
     NSString *dataStr = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
     NSString *errMsg = [NSString stringWithFormat:@"%@",dataStr];
-    MServiceError *error = [MServiceError errorWithMessage:errMsg];
+    QServiceError *error = [QServiceError errorWithMessage:errMsg];
     //error.code = @"E999";
     NSDictionary *errorInfo = [NSDictionary dictionaryWithObjectsAndKeys:errMsg,NSLocalizedDescriptionKey,error,@"serviceError",nil];
-    ticket.error = [NSError errorWithDomain:kMSERVICE_ERROR_DOMAIN code:ticket.httpResponse.statusCode userInfo:errorInfo];
+    ticket.error = [NSError errorWithDomain:kQSERVICE_ERROR_DOMAIN code:ticket.httpResponse.statusCode userInfo:errorInfo];
 }
 
 -(void)handleRequest:(QServiceRequest*)request{
@@ -214,10 +213,10 @@
         // parse error
         NSString *errMsg = [NSString stringWithFormat:@"Error parsing response as JSON, %@",parseError];
         WARN(errMsg);
-        MServiceError *error = [MServiceError errorWithMessage:errMsg];
+        QServiceError *error = [QServiceError errorWithMessage:errMsg];
         //error.code = @"E999";
         NSDictionary *errorInfo = [NSDictionary dictionaryWithObjectsAndKeys:errMsg,NSLocalizedDescriptionKey,error,@"serviceError",nil];
-        request.error = [NSError errorWithDomain:kMSERVICE_ERROR_DOMAIN code:request.httpResponse.statusCode userInfo:errorInfo];
+        request.error = [NSError errorWithDomain:kQSERVICE_ERROR_DOMAIN code:request.httpResponse.statusCode userInfo:errorInfo];
         // return response data as utf-8 string
         request.returnObject = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];//data;
         return;
@@ -266,7 +265,7 @@
     
     if(!request.returnObject){
         NSDictionary *errorInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"Failed to unmarshall response payload",NSLocalizedDescriptionKey,nil];
-        request.error = [NSError errorWithDomain:kMSERVICE_ERROR_DOMAIN code:request.httpResponse.statusCode userInfo:errorInfo];
+        request.error = [NSError errorWithDomain:kQSERVICE_ERROR_DOMAIN code:request.httpResponse.statusCode userInfo:errorInfo];
         request.returnObject = dictOrArray;
     }
 }
