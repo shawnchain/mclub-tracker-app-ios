@@ -26,6 +26,7 @@
 		290C08481BAEC36900DBE8B1 /* UIViewController+AMSlideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 290C08411BAEC36900DBE8B1 /* UIViewController+AMSlideMenu.m */; settings = {ASSET_TAGS = (); }; };
 		290C084B1BAEC3D400DBE8B1 /* icon-menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 290C08491BAEC3D400DBE8B1 /* icon-menu.png */; settings = {ASSET_TAGS = (); }; };
 		290C084C1BAEC3D400DBE8B1 /* icon-menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 290C084A1BAEC3D400DBE8B1 /* icon-menu@2x.png */; settings = {ASSET_TAGS = (); }; };
+		2925E29E1BC3A5110027B5BA /* MTSmartBeaconFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2925E29D1BC3A5110027B5BA /* MTSmartBeaconFilter.m */; settings = {ASSET_TAGS = (); }; };
 		298C5A341BAE81A800DD373A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 298C5A331BAE81A800DD373A /* main.m */; };
 		298C5A371BAE81A800DD373A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 298C5A361BAE81A800DD373A /* AppDelegate.m */; };
 		298C5A3A1BAE81A800DD373A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 298C5A391BAE81A800DD373A /* ViewController.m */; };
@@ -88,6 +89,8 @@
 		290C08411BAEC36900DBE8B1 /* UIViewController+AMSlideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AMSlideMenu.m"; sourceTree = "<group>"; };
 		290C08491BAEC3D400DBE8B1 /* icon-menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-menu.png"; sourceTree = "<group>"; };
 		290C084A1BAEC3D400DBE8B1 /* icon-menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-menu@2x.png"; sourceTree = "<group>"; };
+		2925E29C1BC3A5110027B5BA /* MTSmartBeaconFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSmartBeaconFilter.h; sourceTree = "<group>"; };
+		2925E29D1BC3A5110027B5BA /* MTSmartBeaconFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSmartBeaconFilter.m; sourceTree = "<group>"; };
 		298C5A2F1BAE81A800DD373A /* MTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		298C5A331BAE81A800DD373A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		298C5A351BAE81A800DD373A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -240,6 +243,8 @@
 				290C082A1BAEC0CC00DBE8B1 /* MTMenuViewController.h */,
 				290C082B1BAEC0CC00DBE8B1 /* MTMenuViewController.m */,
 				290C082C1BAEC0CC00DBE8B1 /* MTMenuViewController.xib */,
+				2925E29C1BC3A5110027B5BA /* MTSmartBeaconFilter.h */,
+				2925E29D1BC3A5110027B5BA /* MTSmartBeaconFilter.m */,
 			);
 			path = MTracker;
 			sourceTree = "<group>";
@@ -461,6 +466,7 @@
 				29DE76881BAF013500D606D0 /* QServiceRequest.m in Sources */,
 				29CD482E1BAFD8CE00CF3E8A /* MTrackerService.m in Sources */,
 				290C08441BAEC36900DBE8B1 /* AMSlideMenuLeftTableViewController.m in Sources */,
+				2925E29E1BC3A5110027B5BA /* MTSmartBeaconFilter.m in Sources */,
 				290C08461BAEC36900DBE8B1 /* AMSlideMenuRightMenuSegue.m in Sources */,
 				290C08421BAEC36900DBE8B1 /* AMSlideMenuContentSegue.m in Sources */,
 				290C08481BAEC36900DBE8B1 /* UIViewController+AMSlideMenu.m in Sources */,
