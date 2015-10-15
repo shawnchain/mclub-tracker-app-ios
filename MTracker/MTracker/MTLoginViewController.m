@@ -34,9 +34,12 @@ NSString *const kMTNotifyDeviceLoggedOut = @"kMTNotifyDeviceLoggedOut";
     }
 
     // load saved user name if any
-    NSString *savedUsername = [[MTrackerService sharedInstance] getConfig:kMTConfigUsername];
-    if(savedUsername)
-        self.txtUsername.text = savedUsername;
+    NSString *loginName = [[MTrackerService sharedInstance] getConfig:kMTConfigPhone];
+    if(!loginName){
+        loginName = [[MTrackerService sharedInstance] getConfig:kMTConfigUsername];
+    }
+    if(loginName)
+        self.txtUsername.text = loginName;
     [self.txtUsername becomeFirstResponder];
 }
 

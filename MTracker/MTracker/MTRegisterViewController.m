@@ -111,11 +111,16 @@
             // retrieve the user name and save in preference
             NSString* username = data[@"username"];
             NSString* token = data[@"token"];
-            if(token && username){
-                [mts setConfig:kMTConfigServiceToken value:token];
+            if(username){
                 [mts setConfig:kMTConfigUsername value:username];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kMTNotifyDeviceLoggedIn object:data];
-                self.progressHUD.tag = 1;
+                [mts setConfig:kMTConfigPhone value:self.txtPhoneNumber.text];
+                if(token){
+                    [mts setConfig:kMTConfigServiceToken value:token];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kMTNotifyDeviceLoggedIn object:data];
+                    self.progressHUD.tag = 1; // tag = 1 means goto map view;
+                }else{
+                    self.progressHUD.tag = 2; // tag=2 means should goto login view
+                }
                 self.progressHUD.labelText= @"注册设备成功";
                 // we're done
                 [self.progressHUD hide:YES afterDelay:1];
@@ -130,12 +135,18 @@
 
 #pragma mark - Progress HUD callback
 - (void)hudWasHidden:(MBProgressHUD *)hud{
-    BOOL shouldReturn = self.progressHUD.tag == 1;
+    //BOOL shouldReturn = self.progressHUD.tag == 1;
     [self.progressHUD removeFromSuperViewOnHide];
-    self.progressHUD = nil;
-
-    if(shouldReturn)
+    
+    if(self.progressHUD.tag == 1){
         [self.navigationController popToRootViewControllerAnimated:YES];
+    }else if(self.progressHUD.tag == 2){
+        // redirect to the login page
+        [self onLoginAction:nil];
+    }
+    
+    self.progressHUD = nil;
+    
 }
 
 /*

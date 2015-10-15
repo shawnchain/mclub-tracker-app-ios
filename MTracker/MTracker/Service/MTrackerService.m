@@ -16,6 +16,7 @@
 @implementation MTrackerService
 
 NSString *const kMTConfigUsername = @"kMTConfigUsername";
+NSString *const kMTConfigPhone = @"kMTConfigPhone";
 NSString *const kMTConfigDisplayName = @"kMTConfigDiplayName";
 NSString *const kMTConfigPassword = @"kMTConfigPassword";
 NSString *const kMTConfigServiceToken = @"kMTConfigServiceToken";

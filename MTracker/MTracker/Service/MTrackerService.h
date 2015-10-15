@@ -10,6 +10,7 @@
 #import "QServiceToolKit.h"
 
 FOUNDATION_EXPORT NSString *const kMTConfigUsername;
+FOUNDATION_EXPORT NSString *const kMTConfigPhone;
 FOUNDATION_EXPORT NSString *const kMTConfigDisplayName;
 FOUNDATION_EXPORT NSString *const kMTConfigPassword;
 FOUNDATION_EXPORT NSString *const kMTConfigServiceToken;
