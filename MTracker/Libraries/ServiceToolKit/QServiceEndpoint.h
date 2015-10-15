@@ -1,5 +1,5 @@
 //
-//  MServiceEndpoint.h
+//  QServiceEndpoint.h
 //  
 //  Created by Shawn Chain on 12-1-3.
 //  Copyright 2012 shawn.chain@gmail.com, Alibaba Group
@@ -15,12 +15,12 @@
  * Enum MServiceModelConvertProfile
  */
 typedef enum{
-    MServiceModelConvertProfileDefault = 0,
-    MServiceModelConvertProfilePost = 1
-}MServiceModelConvertProfile;
+    QServiceModelConvertProfileDefault = 0,
+    QServiceModelConvertProfilePost = 1
+}QServiceModelConvertProfile;
 
 
-@protocol MServiceEndpointFilter<NSObject>
+@protocol QServiceEndpointFilter<NSObject>
 @optional
 -(void)endpoint:(QServiceEndpoint*)endpoint willSendRequest:(QServiceRequest*)request;
 -(void)endpoint:(QServiceEndpoint*)endpoint didReceivedResponseForRequest:(QServiceRequest*)request;
@@ -65,13 +65,13 @@ typedef enum{
  * Register service filter for additional hook-up
  *
  */
-+(void)registerGlobalFilter:(id<MServiceEndpointFilter>)filter;
++(void)registerGlobalFilter:(id<QServiceEndpointFilter>)filter;
 
 /*
  * Unregister service filter
  *
  */
-+(void)unregisterGlobalFilter:(id<MServiceEndpointFilter>)filter;
++(void)unregisterGlobalFilter:(id<QServiceEndpointFilter>)filter;
 
 /**
  * Get shared endpoint instance by name
@@ -123,9 +123,9 @@ typedef enum{
 /**
  *@discussion setting key for API ROOT URL
  */
-extern NSString* const kMSERVICE_SETTINGS_API_ROOT_KEY;
+extern NSString* const kQSERVICE_SETTINGS_API_ROOT_KEY;
 
 /*
  * settings key for Access Token
  */
-extern NSString* const kMSERVICE_SETTINGS_ACCESS_TOKEN_KEY;
+extern NSString* const kQSERVICE_SETTINGS_ACCESS_TOKEN_KEY;

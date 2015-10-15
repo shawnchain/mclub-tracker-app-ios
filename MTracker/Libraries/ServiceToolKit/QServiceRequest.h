@@ -1,6 +1,5 @@
 //
-//  MServiceRequest.h
-//  AppManagerClient
+//  QServiceRequest.h
 //
 //  Created by Shawn Chain on 12-12-16.
 //  Copyright (c) 2012年 JoyLabs. All rights reserved.

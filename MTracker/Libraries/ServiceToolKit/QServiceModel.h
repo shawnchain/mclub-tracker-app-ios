@@ -1,6 +1,5 @@
 //
-//  MServiceModel.h
-//  AppManagerClient
+//  QServiceModel.h
 //
 //  Created by Shawn Chain on 12-12-14.
 //  Copyright (c) 2012年 JoyLabs. All rights reserved.
@@ -26,7 +25,7 @@
 /**
  * Paged Result Object
  */
-@interface MServicePageResult : NSObject
+@interface QServicePageResult : NSObject
 /**
  * page size
  */
@@ -45,7 +44,7 @@
 /**
  * Error Object
  */
-@interface MServiceError : NSObject
+@interface QServiceError : NSObject
 @property(nonatomic,readonly,strong) NSString* code;
 @property(nonatomic,readonly,strong) NSString* message;
 @property(nonatomic,readonly,strong) NSString* desc;
@@ -65,4 +64,4 @@
 @end
 
 
-extern NSString* const kMSERVICE_ERROR_DOMAIN;
+extern NSString* const kQSERVICE_ERROR_DOMAIN;

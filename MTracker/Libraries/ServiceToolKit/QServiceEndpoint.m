@@ -1,5 +1,5 @@
 //
-//  MServiceEndpoint.m
+//  QServiceEndpoint.m
 //  
 //  Created by Shawn Chain on 12-1-3.
 //  Copyright 2012 shawn.chain@gmail.com, Alibaba Group
@@ -16,13 +16,13 @@
 #import "QService_URLStrings.h"
 #import "QServiceModel.h"
 
-NSString* const kMService_HTTP_METHOD_GET = @"GET";
-NSString* const kMService_HTTP_METHOD_POST = @"POST";
-NSString* const kMSERVICE_CONTENT_TYPE_FORM = @"application/x-www-form-urlencoded";
-NSString* const kMSERVICE_CONTENT_TYPE_JSON = @"text/json";
-NSString* const kMSERVICE_ERROR_DOMAIN = @"MServiceErrorDomain";
-NSString* const kMSERVICE_SETTINGS_API_ROOT_KEY = @"mservice_settings_api_root";
-NSString* const kMSERVICE_SETTINGS_ACCESS_TOKEN_KEY = @"mservice_settings_access_token";
+NSString* const kQService_HTTP_METHOD_GET = @"GET";
+NSString* const kQService_HTTP_METHOD_POST = @"POST";
+NSString* const kQSERVICE_CONTENT_TYPE_FORM = @"application/x-www-form-urlencoded";
+NSString* const kQSERVICE_CONTENT_TYPE_JSON = @"text/json";
+NSString* const kQSERVICE_ERROR_DOMAIN = @"MServiceErrorDomain";
+NSString* const kQSERVICE_SETTINGS_API_ROOT_KEY = @"qservice_settings_api_root";
+NSString* const kQSERVICE_SETTINGS_ACCESS_TOKEN_KEY = @"qservice_settings_access_token";
 
 #pragma mark - QServiceEndpoint
 @implementation QServiceEndpoint
@@ -38,7 +38,7 @@ NSString* const kMSERVICE_SETTINGS_ACCESS_TOKEN_KEY = @"mservice_settings_access
     }else if([schema hasPrefix:@"MTOP://"]){
         // it's a mtop call
         serviceNameOrURL = [NSString stringWithFormat:@"http://%@",[serviceNameOrURL substringFromIndex:7]];
-        return [[[QServiceEndpoint alloc] initWithURL:serviceNameOrURL protocol:kMSERVICE_PROTOCOL_MTOP] autorelease];
+        return [[[QServiceEndpoint alloc] initWithURL:serviceNameOrURL protocol:kQSERVICE_PROTOCOL_MTOP] autorelease];
     }
     return [[[QServiceEndpoint alloc] initWithName:serviceNameOrURL]autorelease];
 }
@@ -47,7 +47,7 @@ NSString* const kMSERVICE_SETTINGS_ACCESS_TOKEN_KEY = @"mservice_settings_access
 #pragma mark Endpoint Filters
 //WARNING - not thread safe
 static NSMutableArray *_globalFilters = nil;
-+(void)registerGlobalFilter:(id<MServiceEndpointFilter>)filter{
++(void)registerGlobalFilter:(id<QServiceEndpointFilter>)filter{
 
     if(_globalFilters == nil){
         _globalFilters = [[NSMutableArray alloc] initWithCapacity:32];
@@ -58,7 +58,7 @@ static NSMutableArray *_globalFilters = nil;
     }
 }
 
-+(void)unregisterGlobalFilter:(id<MServiceEndpointFilter>)filter{
++(void)unregisterGlobalFilter:(id<QServiceEndpointFilter>)filter{
     if(!_globalFilters){
         return;
     }
@@ -112,7 +112,7 @@ static NSMutableArray *_globalFilters = nil;
 
 -(void) _handleRequest:(QServiceRequest*) request{
     // apply filters
-    for(id<MServiceEndpointFilter> filter in _filters){
+    for(id<QServiceEndpointFilter> filter in _filters){
         if([filter respondsToSelector:@selector(endpoint:didReceivedResponseForRequest:)]){
             [filter endpoint:self didReceivedResponseForRequest:request];
         }
@@ -124,7 +124,7 @@ static NSMutableArray *_globalFilters = nil;
 
 -(void) _beforeSendRequest:(QServiceRequest*) request{
     // call filter callbacks
-    for(id<MServiceEndpointFilter> filter in  _filters){
+    for(id<QServiceEndpointFilter> filter in  _filters){
         if([filter respondsToSelector:@selector(endpoint:willSendRequest:)]){
             [filter endpoint:self willSendRequest:request];
         }
@@ -137,8 +137,8 @@ static NSMutableArray *_globalFilters = nil;
 }
 
 -(id)initWithName:(NSString *)serviceName{
-    NSString *root = [[NSUserDefaults standardUserDefaults]stringForKey:kMSERVICE_SETTINGS_API_ROOT_KEY];//[[MSettings sharedInstance] stringForKey:MSETTINGS_SERVICE_ROOT];
-    NSAssert(root != nil,@"No settings found for key %@",kMSERVICE_SETTINGS_API_ROOT_KEY);
+    NSString *root = [[NSUserDefaults standardUserDefaults]stringForKey:kQSERVICE_SETTINGS_API_ROOT_KEY];//[[MSettings sharedInstance] stringForKey:MSETTINGS_SERVICE_ROOT];
+    NSAssert(root != nil,@"No settings found for key %@",kQSERVICE_SETTINGS_API_ROOT_KEY);
     return [self initWithRootURL:root serviceName:serviceName];
 }
 
@@ -149,7 +149,7 @@ static NSMutableArray *_globalFilters = nil;
 }
 
 -(id)initWithURL:(NSString*)url{
-    return [self initWithURL:url protocol:kMSERVICE_PROTOCOL_DEFAULT];
+    return [self initWithURL:url protocol:kQSERVICE_PROTOCOL_DEFAULT];
 }
 
 -(id)initWithURL:(NSString*)url protocol:(NSString*)protocolName{
@@ -214,16 +214,16 @@ static NSMutableArray *_globalFilters = nil;
     NSAssert(url != nil, @"Service API Root is nil");
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     
-    NSString* existing = [settings stringForKey:kMSERVICE_SETTINGS_API_ROOT_KEY];
+    NSString* existing = [settings stringForKey:kQSERVICE_SETTINGS_API_ROOT_KEY];
     if(existing){
         WARN(@"kMSERVICE_SETTINGS_API_ROOT_KEY exists in settings with value: %@, current registered root %@ will be ignored",existing,url);
         return;
     }
-    [settings setObject:url forKey:kMSERVICE_SETTINGS_API_ROOT_KEY];
+    [settings setObject:url forKey:kQSERVICE_SETTINGS_API_ROOT_KEY];
 }
 
 +(NSString*)getServiceAPIRoot{
      NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    return [settings stringForKey:kMSERVICE_SETTINGS_API_ROOT_KEY];
+    return [settings stringForKey:kQSERVICE_SETTINGS_API_ROOT_KEY];
 }
 @end

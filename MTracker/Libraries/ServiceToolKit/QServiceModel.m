@@ -1,6 +1,5 @@
 //
-//  MServiceModel.m
-//  AppManagerClient
+//  QServiceModel.m
 //
 //  Created by Shawn Chain on 12-12-14.
 //  Copyright (c) 2012年 JoyLabs. All rights reserved.
@@ -35,7 +34,7 @@
 @end
 
 
-@implementation MServicePageResult
+@implementation QServicePageResult
 @synthesize size,offset,items;
 @end
 
@@ -43,7 +42,7 @@
 
 
 #pragma mark - ServiceError
-@implementation MServiceError
+@implementation QServiceError
 
 @synthesize code,message,desc;
 -(id)initWithDict:(NSDictionary*)dict{
@@ -64,7 +63,7 @@
 }
 
 +(id)errorWithCode:(NSString*)code message:(NSString*)message desc:(NSString*)desc{
-    MServiceError *error = [[MServiceError alloc]init];
+    QServiceError *error = [[QServiceError alloc]init];
     error.code = code;
     error.message = message;
     error.desc = desc;

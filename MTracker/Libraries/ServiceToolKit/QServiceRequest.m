@@ -1,6 +1,5 @@
 //
-//  MServiceRequest.m
-//  AppManagerClient
+//  QServiceRequest.m
 //
 //  Created by Shawn Chain on 12-12-16.
 //  Copyright (c) 2012年 JoyLabs. All rights reserved.
@@ -20,7 +19,7 @@
 
 +(QServiceRequest*)requestForOperation:(NSString*)opName returnType:(Class)returnType delegate:(id<QServiceRequestDelegate>)delegate{
     QServiceRequest *req = [[QServiceRequest alloc] init];
-    req.httpMethod = kMService_HTTP_METHOD_GET;
+    req.httpMethod = kQService_HTTP_METHOD_GET;
     req.operationName = opName;
     req.returnType = returnType;
     req.delegate = delegate;
@@ -79,9 +78,9 @@
     NSAssert(_status == MServiceRequestStatusInitialized,@"Could not change request after it has been sent!");
     if(_postValues == nil){
         _postValues = [[NSMutableDictionary alloc] initWithCapacity:32];
-        if([self.httpMethod isEqualToString:kMService_HTTP_METHOD_GET]){
-            self.httpMethod = kMService_HTTP_METHOD_POST;
-            self.contentType = kMSERVICE_CONTENT_TYPE_FORM;
+        if([self.httpMethod isEqualToString:kQService_HTTP_METHOD_GET]){
+            self.httpMethod = kQService_HTTP_METHOD_POST;
+            self.contentType = kQSERVICE_CONTENT_TYPE_FORM;
         }
     }
     [_postValues setValue:value forKey:key];
@@ -123,9 +122,9 @@
         /*
          * build http request object and the existing one will be override
          */
-        if([self.httpMethod isEqualToString:kMService_HTTP_METHOD_POST]){
+        if([self.httpMethod isEqualToString:kQService_HTTP_METHOD_POST]){
             [self _buildHttpPostRequest];
-        }else if([self.httpMethod isEqualToString:kMService_HTTP_METHOD_GET]){
+        }else if([self.httpMethod isEqualToString:kQService_HTTP_METHOD_GET]){
             [self _buildHttpGetRequest];
         }else{
             NSAssert(NO,@"Unsupported http method: %@",self.httpMethod);
@@ -158,7 +157,7 @@ static NSString* _assembleURL(NSString* base, NSString* path, NSDictionary* para
     DBG(@"Build http request: POST: %@",url);
     NSMutableURLRequest* httpRequest = [NSMutableURLRequest requestWithURL:url];
     [httpRequest setTimeoutInterval:25.0]; //FIXME - configurable timeout
-    [httpRequest setHTTPMethod:kMService_HTTP_METHOD_POST];
+    [httpRequest setHTTPMethod:kQService_HTTP_METHOD_POST];
     if(contentType){
         [httpRequest setValue:contentType forHTTPHeaderField:@"Content-Type"];
     }
@@ -174,7 +173,7 @@ static NSString* _assembleURL(NSString* base, NSString* path, NSDictionary* para
     DBG(@"Build http request: GET %@",url.absoluteString);
     
     NSMutableURLRequest* httpRequest = [NSMutableURLRequest requestWithURL:url];
-    [httpRequest setHTTPMethod:kMService_HTTP_METHOD_GET];
+    [httpRequest setHTTPMethod:kQService_HTTP_METHOD_GET];
     [httpRequest setTimeoutInterval:15.0];
     self.httpRequest = httpRequest;
 }

@@ -1,5 +1,5 @@
 //
-//  MServiceToolkit.h
+//  QServiceToolkit.h
 //
 //  Created by Shawn Chain on 12-1-3.
 //  Copyright 2012 shawn.chain@gmail.com, Alibaba Group
@@ -29,9 +29,5 @@ return instance;\
 }
 #endif
 
-
-//@interface MServiceToolkit
-//+(void)registerServiceInterceptor;
-//@end
 
 #endif
