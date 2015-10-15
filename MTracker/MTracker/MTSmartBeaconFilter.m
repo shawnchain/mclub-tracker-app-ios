@@ -156,7 +156,7 @@ static bool _smart_beacon_check(Location *location){
             beaconRate = SB_FAST_RATE + (SB_SLOW_RATE - SB_FAST_RATE) * (SB_HI_SPEED - calculated_speed_kmh/*location->speedInKMH*/) / (SB_HI_SPEED-SB_LOW_SPEED);
         }
     }
-    int32_t rate = lroundf(beaconRate);
+    long rate = lroundf(beaconRate);
     return (timer_clock_seconds() - lastSendTimeSeconds) > (rate);
 }
 

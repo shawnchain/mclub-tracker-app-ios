@@ -59,7 +59,8 @@ NSString *const defaultServiceRootURL = @"https://aprs.hamclub.net/mtracker/api"
     }
 }
 
--(NSString*)getDeviceId{
+//FIXME - duplicated
+-(NSString*)loadDeviceIDString{
     return [[UIDevice currentDevice].identifierForVendor.UUIDString substringFromIndex:24];
 }
 
@@ -80,15 +81,10 @@ NSString *const defaultServiceRootURL = @"https://aprs.hamclub.net/mtracker/api"
     [req addPostValueString:username forKey:@"username"];
     [req addPostValueString:password forKey:@"password"];
     // append the device id
-    NSString *udid = [[self loadDeviceIDString] substringFromIndex:24];
+    NSString *udid = [self loadDeviceIDString];
     [req addPostValueString:udid forKey:@"udid"];
     
     [self.endpoint sendRequest:req];
-}
-
--(NSString*) loadDeviceIDString{
-    NSUUID *udid = [UIDevice currentDevice].identifierForVendor;
-    return udid.UUIDString;
 }
 
 -(void) regist:(NSString*)udid dispName:(NSString*)dispName password:(NSString*)password phone:(NSString*)phone onCompletion:(MTServiceCompletionCallback)callback;{
@@ -126,7 +122,7 @@ NSString *const defaultServiceRootURL = @"https://aprs.hamclub.net/mtracker/api"
         if(callback)callback(NETWORK_ERROR,@"Network error",dict);
     }];
     
-    NSString *udid = [self getDeviceId];
+    NSString *udid = [self loadDeviceIDString];
     [req addPostValueString:udid forKey:@"udid"];
     
     NSString *token = [self getConfig:kMTConfigServiceToken];

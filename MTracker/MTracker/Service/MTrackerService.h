@@ -46,5 +46,4 @@ typedef void (^MTServiceCompletionCallback)(MTServiceCode code, NSString* messag
 
 -(void) loadUserInfo:(MTServiceCompletionCallback)callback;
 
--(NSString*) getDeviceId;
 @end
