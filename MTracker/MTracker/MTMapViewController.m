@@ -303,6 +303,10 @@ exit:
     CLLocation *newLocation = [locations lastObject];
     if([self.smartBeaconFilter accept:newLocation]){
         self.currentNewLocation = newLocation;
+        // update current location label
+        MKMapView *map = (MKMapView*)self.view;
+        NSString *title = [NSString stringWithFormat:@"当前位置(%.0f km/h)",newLocation.speed * 3.6f];
+        [[map userLocation] setTitle:title];
     }
 }
 
