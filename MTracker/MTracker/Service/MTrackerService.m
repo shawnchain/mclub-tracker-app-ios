@@ -133,7 +133,7 @@ NSString *const defaultServiceRootURL = @"https://aprs.hamclub.net/mtracker/api"
     NSString *lon = [NSString stringWithFormat:@"%.6f",location.coordinate.longitude];
     [req addPostValueString:lon forKey:@"lon"];
     if(location.speed >=0){
-        NSString *spd = [NSString stringWithFormat:@"%.0f",location.speed];
+        NSString *spd = [NSString stringWithFormat:@"%.0f",location.speed * 3.6f /*m/s to km/h*/];
         [req addPostValueString:spd forKey:@"speed"];
     }
     if(location.course >=0){
