@@ -23,7 +23,7 @@
 -(void)request:(QServiceRequest*)request failedWithError:(NSError*)error;
 
 
--(void)request:(QServiceRequest*)request updatedWithProgress:(double)progress;
+-(void)request:(QServiceRequest*)request updatedWithProgress:(NSNumber*)progress;
 
 //-(void)request:(MServiceRequest*)request canceldWithReason:(NSString*)reason;
 @end
@@ -38,7 +38,7 @@
 
 typedef void (^QServiceRequestCompleteBlock)(QServiceRequest *request, id returnObject);
 typedef void (^QServiceRequestErrorBlock)(QServiceRequest *request, NSError *error);
-typedef void (^QServiceRequestUpdateBlock)(QServiceRequest *request, double updateProgress);
+typedef void (^QServiceRequestUpdateBlock)(QServiceRequest *request, NSNumber *updateProgress);
 typedef void (^QServiceRequestCancelBlock)(QServiceRequest *request, NSString *reason);
 
 /*
@@ -177,7 +177,7 @@ typedef enum {
  */
 @property(nonatomic,readonly,strong) id returnObject;
 /*
- * Ticket error
+ * Request error
  * @discussion if something wrong from server response, error will be set.
  */
 @property(nonatomic,readonly,strong) NSError* error;

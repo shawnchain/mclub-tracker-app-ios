@@ -10,6 +10,7 @@
 #import "JSONKit.h"
 #import "QLogger.h"
 #import <UIKit/UIApplication.h>
+#import "NSInvocation+vaargs.h"
 
 @implementation QServiceHttpConnector
 
@@ -28,33 +29,6 @@
     [self cancelAll];
     [_requestQueue release];
     [super dealloc];
-}
-
--(NSInvocation*)_createInvocationWithTarget:(id)target selector:(SEL)aSelector retainArguments:(BOOL)retainArguments, ...;
-{
-    va_list ap;
-    va_start(ap, retainArguments);
-    char* args = (char*)ap;
-    NSMethodSignature* signature = [target methodSignatureForSelector:aSelector];
-    NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:signature];
-    if (retainArguments) {
-        [invocation retainArguments];
-    }
-    [invocation setTarget:target];
-    [invocation setSelector:aSelector];
-    for (int index = 2; index < [signature numberOfArguments]; index++) {
-        const char *type = [signature getArgumentTypeAtIndex:index];
-        NSUInteger size, align;
-        NSGetSizeAndAlignment(type, &size, &align);
-        NSUInteger mod = (NSUInteger)args % align;
-        if (mod != 0) {
-            args += (align - mod);
-        }
-        [invocation setArgument:args atIndex:index];
-        args += size;
-    }
-    va_end(ap);
-    return invocation;
 }
 
 -(QServiceRequest*)_getRequestByConnection:(NSURLConnection*)conn{
@@ -86,17 +60,16 @@
         SEL failSelector = @selector(request:failedWithError:);
         if(delegate && [delegate respondsToSelector:failSelector]){
             // call delegate's fial selector on mian thread
-            i = [self _createInvocationWithTarget:delegate selector:failSelector retainArguments:YES,request,request.error];
+            i = [NSInvocation invocationWithTarget:delegate selector:failSelector retainArguments:YES argList:@[request,request.error]];
         }
     }else{
         SEL completeSelector = @selector(request:completedWithObject:);
         if(delegate && [delegate respondsToSelector:completeSelector]){
             // call delegate's complete selector on mian thread
-            i = [self _createInvocationWithTarget:delegate selector:completeSelector retainArguments:YES,request,request.returnObject];
+            i = [NSInvocation invocationWithTarget:delegate selector:completeSelector retainArguments:YES argList:@[request,request.returnObject]];
         }
     }
-    [i performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:NO];
-
+    [i invokeOnMainThreadWaitUntilDone:NO];
 
     
     // we'll remove ticket from queue
@@ -245,9 +218,8 @@
     
     SEL updateSelector = @selector(request:updatedWithProgress:);
     if([delegate respondsToSelector:updateSelector]){
-//        [delegate request:_currentRequest updatedWithProgress:progress];
-        NSInvocation *i = [self _createInvocationWithTarget:delegate selector:updateSelector retainArguments:NO,_currentRequest,_currentRequest.progress];
-        [i performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:NO];
+        NSInvocation *i = [NSInvocation invocationWithTarget:delegate selector:updateSelector retainArguments:NO argList:@[_currentRequest, [NSNumber numberWithFloat:_currentRequest.progress]]];
+        [i invokeOnMainThreadWaitUntilDone:NO];
     }
 }
 

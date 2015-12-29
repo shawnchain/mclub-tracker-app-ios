@@ -9,6 +9,7 @@
 #import "QServiceToolkit-Internals.h"
 #import "QService_URLStrings.h"
 #import "QLogger.h"
+#import "NSInvocation+vaargs.h"
 
 #pragma mark - ServiceRequest Implementation
 @implementation QServiceRequest
@@ -295,7 +296,7 @@ static NSString* _assembleURL(NSString* base, NSString* path, NSDictionary* para
     }
 }
 
--(void) request:(QServiceRequest *)request updatedWithProgress:(double)progress{
+-(void) request:(QServiceRequest *)request updatedWithProgress:(NSNumber*)progress{
     if(_updateBlock){
         dispatch_async(dispatch_get_main_queue(),^{_updateBlock(request,progress);});
     }
@@ -341,57 +342,30 @@ static NSString* _assembleURL(NSString* base, NSString* path, NSDictionary* para
     [super dealloc];
 }
 
-
--(NSInvocation*)_createInvocationWithTarget:(id)target selector:(SEL)aSelector retainArguments:(BOOL)retainArguments, ...;
-{
-    va_list ap;
-    va_start(ap, retainArguments);
-    char* args = (char*)ap;
-    NSMethodSignature* signature = [target methodSignatureForSelector:aSelector];
-    NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:signature];
-    if (retainArguments) {
-        [invocation retainArguments];
-    }
-    [invocation setTarget:target];
-    [invocation setSelector:aSelector];
-    for (int index = 2; index < [signature numberOfArguments]; index++) {
-        const char *type = [signature getArgumentTypeAtIndex:index];
-        NSUInteger size, align;
-        NSGetSizeAndAlignment(type, &size, &align);
-        NSUInteger mod = (NSUInteger)args % align;
-        if (mod != 0) {
-            args += (align - mod);
-        }
-        [invocation setArgument:args atIndex:index];
-        args += size;
-    }
-    va_end(ap);
-    return invocation;
-}
-
 //===============================================================================================
 //FIXME - delegate is always called in main thread inside service tookit(connector)
 //===============================================================================================
 -(void) request:(QServiceRequest *)request completedWithObject:(id)returnObject{
     if(_completeSelector){
-        NSInvocation *i = [self _createInvocationWithTarget:_target selector:_completeSelector retainArguments:NO, request,returnObject];
-        [i performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:NO];
+        NSInvocation *i = [NSInvocation invocationWithTarget:_target selector:_completeSelector retainArguments:NO argList:@[request,returnObject]];
+        [i invokeOnMainThreadWaitUntilDone:NO];
     }
 }
 -(void) request:(QServiceRequest *)request failedWithError:(NSError *)error{
     // If we have fail selector set, call it.
     // If not, fall back to the completed selector, and user handles the request.error manually
     if(_errorSelector){
-        NSInvocation *i = [self _createInvocationWithTarget:_target selector:_errorSelector retainArguments:NO, request,error];
-        [i performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:NO];
+        NSInvocation *i = [NSInvocation invocationWithTarget:_target selector:_errorSelector retainArguments:NO argList:@[request,error]];
+        [i invokeOnMainThreadWaitUntilDone:NO];
     }else{
         [self request:request completedWithObject:request.returnObject];
     }
 }
--(void) request:(QServiceRequest *)request updatedWithProgress:(double)progress{
+-(void) request:(QServiceRequest *)request updatedWithProgress:(NSNumber*)progress{
     if(_updateSelector){
-        NSInvocation *i = [self _createInvocationWithTarget:_target selector:_updateSelector retainArguments:NO, request,progress];
-        [i performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:NO];
+        NSInvocation *i = [NSInvocation invocationWithTarget:_target selector:_updateSelector retainArguments:NO argList:@[request, progress]];
+        //[i performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:NO];
+        [i invokeOnMainThreadWaitUntilDone:NO];
     }
 }
 @end
