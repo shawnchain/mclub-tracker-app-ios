@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AMSlideMenuLeftTableViewController.h"
+//#import "AMSlideMenuLeftTableViewController.h"
 
-@interface MTMenuViewController : AMSlideMenuLeftTableViewController
+@interface MTMenuViewController : UITableViewController //AMSlideMenuLeftTableViewController
 
 #pragma mark - Properties
 @property (strong, nonatomic) NSMutableArray *tableData;

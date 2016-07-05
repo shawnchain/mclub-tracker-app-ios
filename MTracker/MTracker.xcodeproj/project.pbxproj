@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F263CFAEF1FBF7ED483A2F6 /* libPods-MTracker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A6FA08BD0514544CA2B97E /* libPods-MTracker.a */; };
 		2904B4481C327A3100C8E43C /* NSInvocation+vaargs.m in Sources */ = {isa = PBXBuildFile; fileRef = 2904B4471C327A3100C8E43C /* NSInvocation+vaargs.m */; };
 		290C07DA1BAEB32E00DBE8B1 /* MTMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 290C07D81BAEB32E00DBE8B1 /* MTMapViewController.m */; };
 		290C07DB1BAEB32E00DBE8B1 /* MTMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 290C07D91BAEB32E00DBE8B1 /* MTMapViewController.xib */; };
@@ -18,13 +19,6 @@
 		290C07F61BAEBDAE00DBE8B1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 290C07F51BAEBDAE00DBE8B1 /* Default-568h@2x.png */; };
 		290C082D1BAEC0CC00DBE8B1 /* MTMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 290C082B1BAEC0CC00DBE8B1 /* MTMenuViewController.m */; };
 		290C082E1BAEC0CC00DBE8B1 /* MTMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 290C082C1BAEC0CC00DBE8B1 /* MTMenuViewController.xib */; };
-		290C08421BAEC36900DBE8B1 /* AMSlideMenuContentSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 290C08341BAEC36900DBE8B1 /* AMSlideMenuContentSegue.m */; };
-		290C08431BAEC36900DBE8B1 /* AMSlideMenuLeftMenuSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 290C08361BAEC36900DBE8B1 /* AMSlideMenuLeftMenuSegue.m */; };
-		290C08441BAEC36900DBE8B1 /* AMSlideMenuLeftTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 290C08381BAEC36900DBE8B1 /* AMSlideMenuLeftTableViewController.m */; };
-		290C08451BAEC36900DBE8B1 /* AMSlideMenuMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 290C083A1BAEC36900DBE8B1 /* AMSlideMenuMainViewController.m */; };
-		290C08461BAEC36900DBE8B1 /* AMSlideMenuRightMenuSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 290C083D1BAEC36900DBE8B1 /* AMSlideMenuRightMenuSegue.m */; };
-		290C08471BAEC36900DBE8B1 /* AMSlideMenuRightTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 290C083F1BAEC36900DBE8B1 /* AMSlideMenuRightTableViewController.m */; };
-		290C08481BAEC36900DBE8B1 /* UIViewController+AMSlideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 290C08411BAEC36900DBE8B1 /* UIViewController+AMSlideMenu.m */; };
 		290C084B1BAEC3D400DBE8B1 /* icon-menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 290C08491BAEC3D400DBE8B1 /* icon-menu.png */; };
 		290C084C1BAEC3D400DBE8B1 /* icon-menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 290C084A1BAEC3D400DBE8B1 /* icon-menu@2x.png */; };
 		2925E29E1BC3A5110027B5BA /* MTSmartBeaconFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2925E29D1BC3A5110027B5BA /* MTSmartBeaconFilter.m */; };
@@ -35,8 +29,6 @@
 		298C5A3F1BAE81A800DD373A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 298C5A3E1BAE81A800DD373A /* Assets.xcassets */; };
 		298C5A421BAE81A800DD373A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 298C5A401BAE81A800DD373A /* LaunchScreen.storyboard */; };
 		29CD482E1BAFD8CE00CF3E8A /* MTrackerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CD482D1BAFD8CE00CF3E8A /* MTrackerService.m */; };
-		29CD48321BAFEE2600CF3E8A /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CD48311BAFEE2600CF3E8A /* MBProgressHUD.m */; };
-		29DE765C1BAEFFB500D606D0 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 29DE76591BAEFFB500D606D0 /* SRWebSocket.m */; };
 		29DE765F1BAF000300D606D0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DE765E1BAF000300D606D0 /* CFNetwork.framework */; };
 		29DE76611BAF001E00D606D0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DE76601BAF001E00D606D0 /* CoreLocation.framework */; };
 		29DE76631BAF005800D606D0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DE76621BAF005800D606D0 /* Security.framework */; };
@@ -57,6 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11A6FA08BD0514544CA2B97E /* libPods-MTracker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MTracker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2904B4461C327A3100C8E43C /* NSInvocation+vaargs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+vaargs.h"; sourceTree = "<group>"; };
 		2904B4471C327A3100C8E43C /* NSInvocation+vaargs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+vaargs.m"; sourceTree = "<group>"; };
 		290C07D61BAEB27800DBE8B1 /* sample.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = sample.geojson; sourceTree = "<group>"; };
@@ -75,21 +68,6 @@
 		290C082A1BAEC0CC00DBE8B1 /* MTMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMenuViewController.h; sourceTree = "<group>"; };
 		290C082B1BAEC0CC00DBE8B1 /* MTMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMenuViewController.m; sourceTree = "<group>"; };
 		290C082C1BAEC0CC00DBE8B1 /* MTMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTMenuViewController.xib; sourceTree = "<group>"; };
-		290C08331BAEC36900DBE8B1 /* AMSlideMenuContentSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuContentSegue.h; sourceTree = "<group>"; };
-		290C08341BAEC36900DBE8B1 /* AMSlideMenuContentSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuContentSegue.m; sourceTree = "<group>"; };
-		290C08351BAEC36900DBE8B1 /* AMSlideMenuLeftMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuLeftMenuSegue.h; sourceTree = "<group>"; };
-		290C08361BAEC36900DBE8B1 /* AMSlideMenuLeftMenuSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuLeftMenuSegue.m; sourceTree = "<group>"; };
-		290C08371BAEC36900DBE8B1 /* AMSlideMenuLeftTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuLeftTableViewController.h; sourceTree = "<group>"; };
-		290C08381BAEC36900DBE8B1 /* AMSlideMenuLeftTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuLeftTableViewController.m; sourceTree = "<group>"; };
-		290C08391BAEC36900DBE8B1 /* AMSlideMenuMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuMainViewController.h; sourceTree = "<group>"; };
-		290C083A1BAEC36900DBE8B1 /* AMSlideMenuMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuMainViewController.m; sourceTree = "<group>"; };
-		290C083B1BAEC36900DBE8B1 /* AMSlideMenuProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuProtocols.h; sourceTree = "<group>"; };
-		290C083C1BAEC36900DBE8B1 /* AMSlideMenuRightMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuRightMenuSegue.h; sourceTree = "<group>"; };
-		290C083D1BAEC36900DBE8B1 /* AMSlideMenuRightMenuSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuRightMenuSegue.m; sourceTree = "<group>"; };
-		290C083E1BAEC36900DBE8B1 /* AMSlideMenuRightTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuRightTableViewController.h; sourceTree = "<group>"; };
-		290C083F1BAEC36900DBE8B1 /* AMSlideMenuRightTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuRightTableViewController.m; sourceTree = "<group>"; };
-		290C08401BAEC36900DBE8B1 /* UIViewController+AMSlideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AMSlideMenu.h"; sourceTree = "<group>"; };
-		290C08411BAEC36900DBE8B1 /* UIViewController+AMSlideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AMSlideMenu.m"; sourceTree = "<group>"; };
 		290C08491BAEC3D400DBE8B1 /* icon-menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-menu.png"; sourceTree = "<group>"; };
 		290C084A1BAEC3D400DBE8B1 /* icon-menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-menu@2x.png"; sourceTree = "<group>"; };
 		2925E29C1BC3A5110027B5BA /* MTSmartBeaconFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSmartBeaconFilter.h; sourceTree = "<group>"; };
@@ -106,10 +84,6 @@
 		298C5A431BAE81A800DD373A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29CD482C1BAFD8CE00CF3E8A /* MTrackerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTrackerService.h; sourceTree = "<group>"; };
 		29CD482D1BAFD8CE00CF3E8A /* MTrackerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTrackerService.m; sourceTree = "<group>"; };
-		29CD48301BAFEE2600CF3E8A /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		29CD48311BAFEE2600CF3E8A /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		29DE76581BAEFFB500D606D0 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
-		29DE76591BAEFFB500D606D0 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
 		29DE765E1BAF000300D606D0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		29DE76601BAF001E00D606D0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		29DE76621BAF005800D606D0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -143,6 +117,8 @@
 		29EEDDC81BB1409200964CB3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		29EEDDCA1BB140E000964CB3 /* Private_CoreTelephony.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Private_CoreTelephony.h; sourceTree = "<group>"; };
 		29EEDDCD1BB149BD00964CB3 /* entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
+		6C77B58F7EE5657D80B13F8E /* Pods-MTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-MTracker/Pods-MTracker.release.xcconfig"; sourceTree = "<group>"; };
+		B1DD91FD00B8515340007D41 /* Pods-MTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MTracker/Pods-MTracker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +132,7 @@
 				29DE76611BAF001E00D606D0 /* CoreLocation.framework in Frameworks */,
 				29DE765F1BAF000300D606D0 /* CFNetwork.framework in Frameworks */,
 				290C07DD1BAEB35F00DBE8B1 /* MapKit.framework in Frameworks */,
+				0F263CFAEF1FBF7ED483A2F6 /* libPods-MTracker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,10 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				29EEDDC61BB13FF800964CB3 /* PrivateFrameworks */,
-				29CD482F1BAFEE2600CF3E8A /* MBProgressHUD */,
 				29DE76661BAF013500D606D0 /* ServiceToolKit */,
-				29DE76571BAEFFB500D606D0 /* SocketRocket */,
-				290C07FD1BAEBFB000DBE8B1 /* AMSlideMenu */,
 				29DE76621BAF005800D606D0 /* Security.framework */,
 				29DE76601BAF001E00D606D0 /* CoreLocation.framework */,
 				29DE765E1BAF000300D606D0 /* CFNetwork.framework */,
@@ -180,35 +154,14 @@
 			name = Libraries;
 			sourceTree = "<group>";
 		};
-		290C07FD1BAEBFB000DBE8B1 /* AMSlideMenu */ = {
-			isa = PBXGroup;
-			children = (
-				290C08331BAEC36900DBE8B1 /* AMSlideMenuContentSegue.h */,
-				290C08341BAEC36900DBE8B1 /* AMSlideMenuContentSegue.m */,
-				290C08351BAEC36900DBE8B1 /* AMSlideMenuLeftMenuSegue.h */,
-				290C08361BAEC36900DBE8B1 /* AMSlideMenuLeftMenuSegue.m */,
-				290C08371BAEC36900DBE8B1 /* AMSlideMenuLeftTableViewController.h */,
-				290C08381BAEC36900DBE8B1 /* AMSlideMenuLeftTableViewController.m */,
-				290C08391BAEC36900DBE8B1 /* AMSlideMenuMainViewController.h */,
-				290C083A1BAEC36900DBE8B1 /* AMSlideMenuMainViewController.m */,
-				290C083B1BAEC36900DBE8B1 /* AMSlideMenuProtocols.h */,
-				290C083C1BAEC36900DBE8B1 /* AMSlideMenuRightMenuSegue.h */,
-				290C083D1BAEC36900DBE8B1 /* AMSlideMenuRightMenuSegue.m */,
-				290C083E1BAEC36900DBE8B1 /* AMSlideMenuRightTableViewController.h */,
-				290C083F1BAEC36900DBE8B1 /* AMSlideMenuRightTableViewController.m */,
-				290C08401BAEC36900DBE8B1 /* UIViewController+AMSlideMenu.h */,
-				290C08411BAEC36900DBE8B1 /* UIViewController+AMSlideMenu.m */,
-			);
-			name = AMSlideMenu;
-			path = Libraries/AMSlideMenu;
-			sourceTree = "<group>";
-		};
 		298C5A261BAE81A800DD373A = {
 			isa = PBXGroup;
 			children = (
 				298C5A311BAE81A800DD373A /* MTracker */,
 				298C5A301BAE81A800DD373A /* Products */,
 				290C07F21BAEBCC400DBE8B1 /* Libraries */,
+				60C234A091E775E7B18A5042 /* Pods */,
+				54A22A20AB8FDDDE4F1EF01F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -272,26 +225,6 @@
 				29CD482D1BAFD8CE00CF3E8A /* MTrackerService.m */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		29CD482F1BAFEE2600CF3E8A /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				29CD48301BAFEE2600CF3E8A /* MBProgressHUD.h */,
-				29CD48311BAFEE2600CF3E8A /* MBProgressHUD.m */,
-			);
-			name = MBProgressHUD;
-			path = Libraries/MBProgressHUD;
-			sourceTree = "<group>";
-		};
-		29DE76571BAEFFB500D606D0 /* SocketRocket */ = {
-			isa = PBXGroup;
-			children = (
-				29DE76581BAEFFB500D606D0 /* SRWebSocket.h */,
-				29DE76591BAEFFB500D606D0 /* SRWebSocket.m */,
-			);
-			name = SocketRocket;
-			path = Libraries/SocketRocket;
 			sourceTree = "<group>";
 		};
 		29DE76661BAF013500D606D0 /* ServiceToolKit */ = {
@@ -371,6 +304,23 @@
 			path = Libraries/PrivateFrameworks;
 			sourceTree = "<group>";
 		};
+		54A22A20AB8FDDDE4F1EF01F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				11A6FA08BD0514544CA2B97E /* libPods-MTracker.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		60C234A091E775E7B18A5042 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B1DD91FD00B8515340007D41 /* Pods-MTracker.debug.xcconfig */,
+				6C77B58F7EE5657D80B13F8E /* Pods-MTracker.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -378,9 +328,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 298C5A461BAE81A800DD373A /* Build configuration list for PBXNativeTarget "MTracker" */;
 			buildPhases = (
+				024403896FB829777047631E /* [CP] Check Pods Manifest.lock */,
 				298C5A2B1BAE81A800DD373A /* Sources */,
 				298C5A2C1BAE81A800DD373A /* Frameworks */,
 				298C5A2D1BAE81A800DD373A /* Resources */,
+				4425AF3A10B27B73AB44AE9D /* [CP] Embed Pods Frameworks */,
+				0AAA0EA396D861D6DFCD93E1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -415,7 +368,7 @@
 				};
 			};
 			buildConfigurationList = 298C5A2A1BAE81A800DD373A /* Build configuration list for PBXProject "MTracker" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -453,13 +406,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		024403896FB829777047631E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		0AAA0EA396D861D6DFCD93E1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MTracker/Pods-MTracker-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4425AF3A10B27B73AB44AE9D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MTracker/Pods-MTracker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		298C5A2B1BAE81A800DD373A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				298C5A3A1BAE81A800DD373A /* ViewController.m in Sources */,
-				290C08431BAEC36900DBE8B1 /* AMSlideMenuLeftMenuSegue.m in Sources */,
 				298C5A371BAE81A800DD373A /* AppDelegate.m in Sources */,
 				290C07F01BAEBAC100DBE8B1 /* MTRegisterViewController.m in Sources */,
 				29DE76841BAF013500D606D0 /* QServiceRequestSigner.m in Sources */,
@@ -467,27 +467,19 @@
 				29DE76861BAF013500D606D0 /* QServiceEndpoint.m in Sources */,
 				290C07DA1BAEB32E00DBE8B1 /* MTMapViewController.m in Sources */,
 				29DE76831BAF013500D606D0 /* QServiceHttpConnector.m in Sources */,
-				290C08471BAEC36900DBE8B1 /* AMSlideMenuRightTableViewController.m in Sources */,
 				29DE76881BAF013500D606D0 /* QServiceRequest.m in Sources */,
 				2904B4481C327A3100C8E43C /* NSInvocation+vaargs.m in Sources */,
 				29CD482E1BAFD8CE00CF3E8A /* MTrackerService.m in Sources */,
-				290C08441BAEC36900DBE8B1 /* AMSlideMenuLeftTableViewController.m in Sources */,
 				2925E29E1BC3A5110027B5BA /* MTSmartBeaconFilter.m in Sources */,
-				290C08461BAEC36900DBE8B1 /* AMSlideMenuRightMenuSegue.m in Sources */,
-				290C08421BAEC36900DBE8B1 /* AMSlideMenuContentSegue.m in Sources */,
-				290C08481BAEC36900DBE8B1 /* UIViewController+AMSlideMenu.m in Sources */,
 				29DE76811BAF013500D606D0 /* QService_GTMStringEncoding.m in Sources */,
-				290C08451BAEC36900DBE8B1 /* AMSlideMenuMainViewController.m in Sources */,
 				29DE76821BAF013500D606D0 /* QService_URLStrings.m in Sources */,
 				298C5A341BAE81A800DD373A /* main.m in Sources */,
 				29DE76901BAF02A700D606D0 /* SCLogger.m in Sources */,
-				29DE765C1BAEFFB500D606D0 /* SRWebSocket.m in Sources */,
 				29DE768A1BAF013500D606D0 /* QServiceProtocol_JOYAPI.m in Sources */,
 				29DE76871BAF013500D606D0 /* QServiceModel.m in Sources */,
 				290C082D1BAEC0CC00DBE8B1 /* MTMenuViewController.m in Sources */,
 				29DE76941BAF036C00D606D0 /* JSONKit.m in Sources */,
 				290C07EB1BAEBA9E00DBE8B1 /* MTLoginViewController.m in Sources */,
-				29CD48321BAFEE2600CF3E8A /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,7 +522,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiao Qian (DAAHYQ6ZVS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shawn Qian (CBXY6N266L)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -549,7 +541,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -587,7 +579,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -597,6 +589,7 @@
 		};
 		298C5A471BAE81A800DD373A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1DD91FD00B8515340007D41 /* Pods-MTracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -614,6 +607,7 @@
 		};
 		298C5A481BAE81A800DD373A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C77B58F7EE5657D80B13F8E /* Pods-MTracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

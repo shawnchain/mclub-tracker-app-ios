@@ -41,7 +41,7 @@
     
     CLLocationManager *locMan = [[CLLocationManager alloc] init];
     locMan.delegate = self;
-    locMan.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+    locMan.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;//kCLLocationAccuracyBestForNavigation;
     self.locationManager = locMan;
 
     // Use smartbeaconf ilter
@@ -303,11 +303,68 @@ exit:
     CLLocation *newLocation = [locations lastObject];
     if([self.smartBeaconFilter accept:newLocation]){
         self.currentNewLocation = newLocation;
-        // update current location label
-        MKMapView *map = (MKMapView*)self.view;
-        NSString *title = [NSString stringWithFormat:@"当前位置(%.0f km/h)",newLocation.speed * 3.6f];
-        [[map userLocation] setTitle:title];
+        
+        if([self runningInForeground]){
+            // update current location label
+            MKMapView *map = (MKMapView*)self.view;
+            NSString *title = [NSString stringWithFormat:@"当前位置(%.0f km/h)",newLocation.speed * 3.6f];
+            [[map userLocation] setTitle:title];
+        }else{
+            [self scheduleAlarmForLocation:newLocation];
+        }
     }
+}
+
+#pragma mark - Local Notification For Test Purpose
+
+#define ALARM_INTERVAL_SECONDS 15
+- (void)scheduleAlarmForLocation:(CLLocation*)location {
+    static NSDate *lastNotifyTime = nil;
+    
+    NSDate *t = [NSDate date];
+    if(lastNotifyTime != nil && fabs([t timeIntervalSinceDate:lastNotifyTime]) < ALARM_INTERVAL_SECONDS){
+        return;
+    }
+    lastNotifyTime = t;
+    
+    UIApplication* app = [UIApplication sharedApplication];
+    NSArray*    oldNotifications = [app scheduledLocalNotifications];
+    
+    // Clear out the old notification before scheduling a new one.
+    if ([oldNotifications count] > 0)
+        [app cancelAllLocalNotifications];
+    
+    // Create a new notification.
+    UILocalNotification* alarm = [[UILocalNotification alloc] init];
+    if (alarm)
+    {
+        alarm.fireDate = [[NSDate alloc] initWithTimeIntervalSinceNow:1];
+        alarm.timeZone = [NSTimeZone defaultTimeZone];
+        alarm.repeatInterval = 0;
+        alarm.soundName = @"alarmsound.caf";
+        alarm.alertBody = [NSString stringWithFormat:@"正在跟踪，当前速度(%.0f km/h)",location.speed > 0 ? (location.speed * 3.6f):0.f];
+        NSLog(@"Local Notif: %@",alarm.alertBody);
+        
+        [app scheduleLocalNotification:alarm];
+    }
+}
+
+
+#pragma mark - Application BG/FG state check
+-(BOOL) runningInBackground
+{
+    UIApplicationState state = [UIApplication sharedApplication].applicationState;
+    BOOL result = (state == UIApplicationStateBackground);
+    
+    return result;
+}
+
+-(BOOL) runningInForeground
+{
+    UIApplicationState state = [UIApplication sharedApplication].applicationState;
+    BOOL result = (state == UIApplicationStateActive);
+    
+    return result;
 }
 
 @end

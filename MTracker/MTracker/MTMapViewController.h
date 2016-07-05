@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AMSlideMenuMainViewController.h"
+//#import "AMSlideMenuMainViewController.h"
 
-@interface MTMapViewController : AMSlideMenuMainViewController
+@interface MTMapViewController: UIViewController //: AMSlideMenuMainViewController
 
 @end
