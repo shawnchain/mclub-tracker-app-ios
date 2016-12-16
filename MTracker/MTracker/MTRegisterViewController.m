@@ -29,7 +29,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"注册";
-    [self.navigationItem setHidesBackButton:YES];
+    
+    //[self.navigationItem setHidesBackButton:YES];
+    
+    /*
+    UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(onCancelAction:)];
+    self.navigationItem.leftBarButtonItem = back;
+    */
     
     // show the login
     if(!self.hideLoginButton){

@@ -11,6 +11,7 @@
 #import "MTLoginViewController.h"
 #import "MTRegisterViewController.h"
 #import "MTrackerService.h"
+#import "MTSettingsVC.h"
 
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
@@ -114,7 +115,15 @@
 }
 
 -(IBAction)onSetupAction:(id)sender{
-    NSLog(@"TODO - call setup view");
+    MTSettingsVC *settings = [[MTSettingsVC alloc] initWithNibName:nil bundle:nil];
+#if 1
+    [self.navigationController pushViewController:settings animated:YES];
+#else
+    UINavigationController init
+    UINavigationController *setupNC = [UINavigationController alloc] initWithRoo
+    [self.navigationController presentViewController:settings animated:YES completion:^(void){
+    }];
+#endif
 }
 
 -(IBAction)onLoginAction:(id)sender{
@@ -123,7 +132,6 @@
 //    [self.navigationController presentViewController:login animated:YES completion:^{
 //        // noop;
 //    }];
-    NSLog(@"TODO - call setup view");
 }
 
 -(IBAction)onRegisterAction:(id)sender{

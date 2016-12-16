@@ -66,6 +66,10 @@
         SEL completeSelector = @selector(request:completedWithObject:);
         if(delegate && [delegate respondsToSelector:completeSelector]){
             // call delegate's complete selector on mian thread
+            if(request.returnObject == nil){
+                // Workaround for the NSArray exception for null object
+                request.returnObject = @{};//@{@"code":@"", @"message":@"no result"};
+            }
             i = [NSInvocation invocationWithTarget:delegate selector:completeSelector retainArguments:YES argList:@[request,request.returnObject]];
         }
     }

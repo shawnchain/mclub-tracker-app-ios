@@ -25,7 +25,14 @@ NSString *const kMTNotifyDeviceLoggedOut = @"kMTNotifyDeviceLoggedOut";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"登录";
+    
+#if 0
     [self.navigationItem setHidesBackButton:YES];
+#else
+    UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(onCancelAction:)];
+    self.navigationItem.leftBarButtonItem = back;
+#endif
+    
 
     if(!self.hideRegisterButton){
         // show the register button

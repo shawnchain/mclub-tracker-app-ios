@@ -46,6 +46,10 @@
 		29DE76941BAF036C00D606D0 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 29DE76931BAF036C00D606D0 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		29EEDDC91BB1409200964CB3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29EEDDC81BB1409200964CB3 /* CoreTelephony.framework */; };
 		29EEDDCE1BB149BD00964CB3 /* entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29EEDDCD1BB149BD00964CB3 /* entitlements.plist */; };
+		29F8E9CF1DF2B79C00248726 /* MTSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F8E9CD1DF2B79C00248726 /* MTSettingsVC.m */; };
+		29F8E9D01DF2B79C00248726 /* MTSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F8E9CE1DF2B79C00248726 /* MTSettingsVC.xib */; };
+		29F8E9D41DF2C29E00248726 /* APTIBle.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F8E9D31DF2C29E00248726 /* APTIBle.m */; };
+		29F8E9D61DF2C48D00248726 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29F8E9D51DF2C48D00248726 /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +121,12 @@
 		29EEDDC81BB1409200964CB3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		29EEDDCA1BB140E000964CB3 /* Private_CoreTelephony.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Private_CoreTelephony.h; sourceTree = "<group>"; };
 		29EEDDCD1BB149BD00964CB3 /* entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
+		29F8E9CC1DF2B79C00248726 /* MTSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSettingsVC.h; sourceTree = "<group>"; };
+		29F8E9CD1DF2B79C00248726 /* MTSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSettingsVC.m; sourceTree = "<group>"; };
+		29F8E9CE1DF2B79C00248726 /* MTSettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTSettingsVC.xib; sourceTree = "<group>"; };
+		29F8E9D21DF2C29E00248726 /* APTIBle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APTIBle.h; path = Driver/APTIBle.h; sourceTree = "<group>"; };
+		29F8E9D31DF2C29E00248726 /* APTIBle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APTIBle.m; path = Driver/APTIBle.m; sourceTree = "<group>"; };
+		29F8E9D51DF2C48D00248726 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		6C77B58F7EE5657D80B13F8E /* Pods-MTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-MTracker/Pods-MTracker.release.xcconfig"; sourceTree = "<group>"; };
 		B1DD91FD00B8515340007D41 /* Pods-MTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MTracker/Pods-MTracker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29F8E9D61DF2C48D00248726 /* CoreBluetooth.framework in Frameworks */,
 				29EEDDC91BB1409200964CB3 /* CoreTelephony.framework in Frameworks */,
 				29DE76651BAF00B100D606D0 /* libicucore.tbd in Frameworks */,
 				29DE76631BAF005800D606D0 /* Security.framework in Frameworks */,
@@ -176,6 +187,7 @@
 		298C5A311BAE81A800DD373A /* MTracker */ = {
 			isa = PBXGroup;
 			children = (
+				29F8E9D11DF2C25700248726 /* Driver */,
 				29CD482B1BAFD8CE00CF3E8A /* Service */,
 				290C07F71BAEBEA800DBE8B1 /* MTrackerPrefixHeader.pch */,
 				298C5A351BAE81A800DD373A /* AppDelegate.h */,
@@ -201,6 +213,9 @@
 				290C082C1BAEC0CC00DBE8B1 /* MTMenuViewController.xib */,
 				2925E29C1BC3A5110027B5BA /* MTSmartBeaconFilter.h */,
 				2925E29D1BC3A5110027B5BA /* MTSmartBeaconFilter.m */,
+				29F8E9CC1DF2B79C00248726 /* MTSettingsVC.h */,
+				29F8E9CD1DF2B79C00248726 /* MTSettingsVC.m */,
+				29F8E9CE1DF2B79C00248726 /* MTSettingsVC.xib */,
 			);
 			path = MTracker;
 			sourceTree = "<group>";
@@ -304,9 +319,19 @@
 			path = Libraries/PrivateFrameworks;
 			sourceTree = "<group>";
 		};
+		29F8E9D11DF2C25700248726 /* Driver */ = {
+			isa = PBXGroup;
+			children = (
+				29F8E9D21DF2C29E00248726 /* APTIBle.h */,
+				29F8E9D31DF2C29E00248726 /* APTIBle.m */,
+			);
+			name = Driver;
+			sourceTree = "<group>";
+		};
 		54A22A20AB8FDDDE4F1EF01F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				29F8E9D51DF2C48D00248726 /* CoreBluetooth.framework */,
 				11A6FA08BD0514544CA2B97E /* libPods-MTracker.a */,
 			);
 			name = Frameworks;
@@ -350,12 +375,12 @@
 		298C5A271BAE81A800DD373A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = MClub;
 				TargetAttributes = {
 					298C5A2E1BAE81A800DD373A = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = H96PB6894F;
+						DevelopmentTeam = C2TN68FE3Y;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -398,6 +423,7 @@
 				290C082E1BAEC0CC00DBE8B1 /* MTMenuViewController.xib in Resources */,
 				290C07DB1BAEB32E00DBE8B1 /* MTMapViewController.xib in Resources */,
 				290C07F11BAEBAC100DBE8B1 /* MTRegisterViewController.xib in Resources */,
+				29F8E9D01DF2B79C00248726 /* MTSettingsVC.xib in Resources */,
 				290C084B1BAEC3D400DBE8B1 /* icon-menu.png in Resources */,
 				290C07F61BAEBDAE00DBE8B1 /* Default-568h@2x.png in Resources */,
 				298C5A3D1BAE81A800DD373A /* Main.storyboard in Resources */,
@@ -471,6 +497,7 @@
 				2904B4481C327A3100C8E43C /* NSInvocation+vaargs.m in Sources */,
 				29CD482E1BAFD8CE00CF3E8A /* MTrackerService.m in Sources */,
 				2925E29E1BC3A5110027B5BA /* MTSmartBeaconFilter.m in Sources */,
+				29F8E9CF1DF2B79C00248726 /* MTSettingsVC.m in Sources */,
 				29DE76811BAF013500D606D0 /* QService_GTMStringEncoding.m in Sources */,
 				29DE76821BAF013500D606D0 /* QService_URLStrings.m in Sources */,
 				298C5A341BAE81A800DD373A /* main.m in Sources */,
@@ -480,6 +507,7 @@
 				290C082D1BAEC0CC00DBE8B1 /* MTMenuViewController.m in Sources */,
 				29DE76941BAF036C00D606D0 /* JSONKit.m in Sources */,
 				290C07EB1BAEBA9E00DBE8B1 /* MTLoginViewController.m in Sources */,
+				29F8E9D41DF2C29E00248726 /* APTIBle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,11 +546,13 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shawn Qian (CBXY6N266L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shawn Chain (V2WCT7KAFP)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -562,11 +592,13 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Alibaba(China)Technology Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shawn Chain (V2WCT7KAFP)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -594,11 +626,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = C2TN68FE3Y;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MTracker/MTrackerPrefixHeader.pch;
 				INFOPLIST_FILE = MTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mteam.beta.MTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = hamclub.mtracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -612,11 +645,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = C2TN68FE3Y;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MTracker/MTrackerPrefixHeader.pch;
 				INFOPLIST_FILE = MTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mteam.beta.MTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = hamclub.mtracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

@@ -13,5 +13,5 @@ target 'MTracker' do
 #  pod 'RESideMenu', '~> 4.0.7'
 #  pod 'AMSlideMenu', '~> 1.5.4'
   pod 'SWRevealViewController', :git => 'https://github.com/John-Lluch/SWRevealViewController.git', :tag => 'v2.4.0'
-
+  pod 'GeoJSONSerialization', '~> 0.0.4'
 end

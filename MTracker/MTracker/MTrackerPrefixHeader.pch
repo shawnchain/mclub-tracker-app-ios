@@ -32,4 +32,6 @@
 #import <Foundation/Foundation.h>
 #endif
 
+#define DEBUG_DUMP 1
+
 #endif /* MTrackerPrefixHeader_pch */

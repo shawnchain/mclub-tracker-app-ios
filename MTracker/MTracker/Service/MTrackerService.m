@@ -151,11 +151,11 @@ NSString *const defaultServiceRootURL = @"https://aprs.hamclub.net/mtracker/api"
     QServiceRequest *req = [QServiceRequest requestForOperation:@"/user" returnType:[NSDictionary class] completeBlock:^(QServiceRequest *request, NSDictionary* result) {
         NSNumber *code = result[@"code"];
         NSString *message = result[@"message"];
-        NSLog(@"login result: %@, %@, %@",code, message, result);
+        NSLog(@"loadUserInfo result: %@, %@, %@",code, message, result);
         if(callback)callback(code.intValue,message,result);
     } failBlock:^(QServiceRequest *request, NSError *error) {
         //error(request,error);
-        NSLog(@"login error: %@",error);
+        NSLog(@"loadUserInfo error: %@",error);
         NSDictionary *dict = @{@"error":error};
         if(callback)callback(NETWORK_ERROR,@"Network error",dict);
     }];
